@@ -1,3 +1,28 @@
+<?php
+include ('class.ticket.php');
+include ('manejadorTicket.php');
+
+if(!empty() && !empty()){
+
+}
+
+$hoy = date('Y-m-d H:i:s');
+
+$mt = new ManejadorTicket();
+$ticket = new Ticket();
+
+$ticket->setAsunto($_POST['asunto']);
+$ticket->setProblema($_POST['descripcion']);
+$ticket->setFechaInicio($hoy);
+
+
+$mt->insertarTicket($ticket);
+
+
+
+?>
+
+
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -62,44 +87,49 @@
         <div class="limiter">
             <div class="container-general">
         <div class="wrap-login800">
-          <table class="table">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Asunto</th>
-                <th scope="col">Mensaje</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Prioridad</th>
-                <th scope="col">Departamento</th>
-                <th scope="col">Fecha añadido</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>La pc no enciende</td>
-                <td>Se me jodió la compu</td>
-                <td>Activo</td>
-                <td>Media</td>
-                <td>Contabilidad</td>
-                <td>16/10/2018</td>
+            <form class="login800-form validate-form" action="ticket.html" method="POST" name="form">
+                <span class="general-form-title">
+                    Redactar nuevo Ticket
+                  </span>
+        
+                  <div class="wrap-input800 validate-input" data-validate = "Escriba asunto">
+                    <input class="input800" type="text" name="asunto" placeholder="Asunto">
+                    <span class="focus-input800"></span>
+                    <span class="symbol-input800">
+                      <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
+                  </div>
+        
+                  <div class="wrap-input100 validate-input" data-validate = "Describa el problema">
+                    <textarea class="input-text-area" type="text" name="descripcion" placeholder="Descripción del problema"></textarea>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                      <i class="fa fa-lock" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  
+                  <div class="form-group">
+                      <div class="input-group input-file" name="Fichier1">
+                          <input type="text" class="form-control" placeholder='Selecciona un archivo...' />			
+                              <span class="input-group-btn">
+                              <button class="btn btn-default btn-choose" type="button">Examinar</button>
+                          </span>
+                  
+                  
+                      </div>
+                    </div>
 
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-          
+                  <div class="  my-container-form-btn">
+                      
+                    <button class="login100-form-btn" type="submit" style="width: 200px; margin-right: 8px;">
+                      Enviar Ticket
+                    </button>
+                    <button type="reset" class="cancell-form-btn" style="width: 200px; margin-left: 8px;">
+                      Reset
+                    </button>
+                  </div>
+        
+              </form>
           </div>
           
           

@@ -79,6 +79,56 @@ $(function() {
 
         $(thisAlert).removeClass('alert-validate');
     }
+    // validacion ticket
+    var input1 = $('.validate-input .input800');
+
+    $('.validate-form').on('submit',function(){
+        var check = true;
+
+        for(var i=0; i<input1.length; i++) {
+            if(validate(input1[i]) == false){
+                showValidate(input1[i]);
+                check=false;
+            }
+        }
+
+        return check;
+    });
+
+
+    $('.validate-form .input800').each(function(){
+        $(this).focus(function(){
+           hideValidate(this);
+        });
+    });
+
+    function validate (input1) {
+        if($(input1).attr('type') == 'asunto' || $(input1).attr('descripcion') == 'descripcion') {
+            if($(input1).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
+                return false;
+            }
+        }
+        else {
+            if($(input1).val().trim() == ''){
+                return false;
+            }
+        }
+    }
+
+    function showValidate(input1) {
+        var thisAlert = $(input1).parent();
+
+        $(thisAlert).addClass('alert-validate');
+    }
+
+    function hideValidate(input1) {
+        var thisAlert = $(input1).parent();
+
+        $(thisAlert).removeClass('alert-validate');
+    }
+
+    
+    
     
     
 
