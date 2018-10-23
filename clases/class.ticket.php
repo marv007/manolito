@@ -10,7 +10,7 @@ class Ticket{
   private $fechaFinal = '';
   private $estado ='Activo';
   private $prioridad;
-  private $idArchivo = 1;
+  private $idArchivo;
   
   
 

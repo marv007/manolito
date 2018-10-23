@@ -23,8 +23,8 @@ class ManejadorTicket extends mysqli{
             $idArchivo = $t->getIdArchivo();
 
             
-
-            $stmn = "INSERT INTO ticket(ID_usuario, asunto, problema, solucion, fechaInicio, estado, prioridad, ID_archivo) values('".$idUsuario."','".$asunto."', '".$problema."', '".$solucion."', '".$fechaInicio."', '".$estado."', '".$prioridad."', '".$idArchivo."')";
+            //le quitamos idArchivo
+            $stmn = "INSERT INTO ticket(ID_usuario, asunto, problema, solucion, fechaInicio, estado, prioridad) values('".$idUsuario."','".$asunto."', '".$problema."', '".$solucion."', '".$fechaInicio."', '".$estado."', '".$prioridad."')";
             $conn->execQuery($stmn);
             
 
