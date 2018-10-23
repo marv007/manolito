@@ -1,9 +1,29 @@
 <?php
 require 'clases/class.ticket.php';
 require 'clases/manejadorTicket.php';
+require 'clases/class.archivo.php';
+require 'clases/manejadorArchivo.php';
 
 
 if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
+    //guardando archivos en servidor
+    $nombre_archivo = $_FILES['Fichier1']['name'];
+    $tipo_archivo = $_FILES['Fichier1']['type'];
+    $tamanio_archivo = $_FILES['Fichier1']['size'];
+    //Ruta del directorio destino servidor
+    $destino = $_SERVER['DOCUMENT_ROOT'].'/manolito/uploads/';
+    move_uploaded_file($_FILES['Fichier1']['tmp_name'], $destino.$nombre_archivo);
+
+    //insertando archivo
+    $ma = new ManejadorArchivo();
+    $archivo = new Archivo();
+
+    $archivo->setNombreArchivo($nombre_archivo);
+    $archivo->setRutaArchivo($destino);
+
+    $ma->insertarArchivo($archivo);
+
+    //Capturando y guardando datos en BD
     $hoy = date('Y-m-d H:i:s');
 
     $mt = new ManejadorTicket();
@@ -126,7 +146,7 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
             <div class="container-general">
                
         <div class="wrap-login800" >
-            <form class="login800-form validate-form" action="ticket.php" method="POST" name="form" >
+            <form class="login800-form validate-form" action="ticket.php" enctype="multipart/form-data" method="POST" name="form" >
                 <span class="general-form-title">
                     Redactar nuevo Ticket
                   </span>
@@ -146,11 +166,11 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
                   </div>
                   
                   <div class="form-group">
-                      <div class="input-group input-file" name="Fichier1">
+                      <div class="input-group input-file" name="Fichier1" type="file" >
                           <input type="text" class="form-control" placeholder='Selecciona un archivo...' />			
                               <span class="input-group-btn">
-                              <button class="btn btn-default btn-choose" type="button">Examinar</button>
-                          </span>
+                                <button class="btn btn-default btn-choose" type="button">Examinar</button>
+                              </span>
                   
                   
                       </div>
