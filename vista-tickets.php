@@ -17,6 +17,7 @@ $arrTicket = $tk->obtenerTicket();
         <title>Vista Tickets</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="images/icons/lista.png"/>
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <style>
@@ -71,7 +72,7 @@ $arrTicket = $tk->obtenerTicket();
     <div class="limiter">
             
       <div class="container-general">
-        <div class="wrap-login800" style="background-color: #e8e8e8; border-color: #000000; overflow: auto;" >
+        <div class="wrap-login800" style="background-color: #e8e8e8; border-color: #000000;" >
         
          <table class="table table-hover table-striped">
            <h2><span class="glyphicon glyphicon-list-alt"></span> Mis Tickets</h2>

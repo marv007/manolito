@@ -48,7 +48,7 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>Redactar ticket </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -60,7 +60,7 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
             }
         </style>
 <!--===============================================================================================-->	
-<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<link rel="icon" type="image/png" href="images/icons/ticket-add.png"/>
 <!--===============================================================================================-->
 	
 <!--===============================================================================================-->
@@ -83,23 +83,12 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
 
        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
         
-        <!--Scrip para que desaparezca el mensaje modal -->
-         <script> 
-            $(function(){
-              $('#mymodal').on('show.bs.modal',function(){
-                var myModal = $(this);
-           clearTimeout(myModal.data('hideInterval'));
-            myModal.data('hideInterval', setTimeout(function(){
-            myModal.modal('hide');
-            }, 3000));
         
-            });
-            });
-        </script>
+         
 
     </head>
     <body>
-        <!--[if lt IE 8]>
+    <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
@@ -145,8 +134,8 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
 
             <div class="container-general">
                
-        <div class="wrap-login800" >
-            <form class="login800-form validate-form" action="ticket.php" enctype="multipart/form-data" method="POST" name="form" >
+        <div class="wrap-login800">
+            <form class="login800-form validate-form" action="ticket.php" enctype="multipart/form-data" method="POST" name="form">
                 <span class="general-form-title">
                     Redactar nuevo Ticket
                   </span>
@@ -191,12 +180,7 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
                                <!--alert-->
                                <?php
                         }else{ ?>
-                               <!--  alert -->
-                               <div class="alert alert-danger" role="alert" style="position:absolute; top:60px; right:15px;">
-                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                 <span class= "glyphicon glyphicon-ok"></span><strong>¡Error!</strong><br>¡Debe llenar los campos asunto y descripción! 
-                               </div>
-                              <!--alert-->
+                               
                        <?php }?>
 
       
