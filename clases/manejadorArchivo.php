@@ -36,7 +36,7 @@ class ManejadorArchivo extends mysqli{
             while($docum = $resultado->fetch_assoc()){
                  //crea un objeto ticket
                  $dc = new Documento();
-                 $dc->setIdDocumento($docum['ID_documento']);
+                 $dc->setIdDocumento($docum['ID_archivo']);
                  $dc->setNombreDocumento($docum['nombre']);
                  $dc->setProblema($docum['ruta']);
                  
@@ -52,6 +52,20 @@ class ManejadorArchivo extends mysqli{
             die("Error :". $e->getMessage());
         }
         
+    }
+
+    public function obtenerId(){
+        try{ 
+            $conn = conexion::getInstance();
+            $stmn = "SELECT ID_archivo from archivo order by ID_archivo desc limit 1 ";
+            $resultado = $conn->execQuery($stmn);
+            $ID = $resultado->fetch_assoc();
+            $id = $ID['ID_archivo'];
+            return $id;
+        }catch(exeption $e){
+            die("Error :". $e->getMessage());
+        }
+
     }
 }
 

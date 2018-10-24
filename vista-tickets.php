@@ -87,13 +87,13 @@ $arrTicket = $tk->obtenerTicket();
                 <th scope="col" class="th-sm">Fecha añadido</th>
               </tr>
             </thead>
-            
+         
             <?php
             $i = 0;
             while($i < count($arrTicket)){
                 $a = $arrTicket[$i];
             ?>
-            <tbody style="background-color: #d3d3d3">
+            <tbody class="tabla-scroll" style="background-color: #d3d3d3">
               <tr>
                 <td class="filterable-cell" scope="row"><?php echo $a->getIdTicket() ?></td>
                 <td class="filterable-cell"><?php echo $a->getAsunto() ?></td>
@@ -109,6 +109,7 @@ $arrTicket = $tk->obtenerTicket();
             $i++;
             }
             ?>
+         
           </table>
           
           </div>

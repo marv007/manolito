@@ -6,7 +6,9 @@ require 'clases/manejadorArchivo.php';
 
 
 if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
-    //guardando archivos en servidor
+  $ma = new ManejadorArchivo();
+  if(!empty($_FILES['Fichier1']['name'])){
+     //guardando archivos en servidor
     $nombre_archivo = $_FILES['Fichier1']['name'];
     $tipo_archivo = $_FILES['Fichier1']['type'];
     $tamanio_archivo = $_FILES['Fichier1']['size'];
@@ -15,14 +17,15 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
     move_uploaded_file($_FILES['Fichier1']['tmp_name'], $destino.$nombre_archivo);
 
     //insertando archivo
-    $ma = new ManejadorArchivo();
     $archivo = new Archivo();
 
     $archivo->setNombreArchivo($nombre_archivo);
     $archivo->setRutaArchivo($destino);
 
     $ma->insertarArchivo($archivo);
-
+  } //fin validacion si archivo es distinto de null 
+  
+  
     //Capturando y guardando datos en BD
     $hoy = date('Y-m-d H:i:s');
 
@@ -32,7 +35,9 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
     $ticket->setAsunto($_POST['asunto']);
     $ticket->setProblema($_POST['descripcion']);
     $ticket->setFechaInicio($hoy);
-
+    $ticket->setIdArchivo($ma->obtenerId());
+    
+    
 
     $mt->insertarTicket($ticket);
 

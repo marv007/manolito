@@ -239,6 +239,12 @@ iframe {
   
 }
 
+.tabla-scroll{
+  overflow: auto;
+  
+
+}
+
 .wrap-login400 {
   width: 15%;
   border: 320px 20px 20px 20px;
