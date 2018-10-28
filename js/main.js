@@ -81,6 +81,7 @@ $(function() {
     }
     // validacion ticket
     var input1 = $('.validate-input .input800');
+    
 
     $('.validate-form').on('submit',function(){
         var check = true;
@@ -117,7 +118,19 @@ $(function() {
 
     function showValidate(input1) {
         var thisAlert = $(input1).parent();
+        
 
+        
+        
+        Push.create("¡Error!", { //Titulo de la notificación
+			body: "Uno o más campos están vacíos.", //Texto del cuerpo de la notificación
+			icon: 'images/icons/Error.png', //Icono de la notificación
+			timeout: 6000, //Tiempo de duración de la notificación
+			onClick: function () {//Función que se cumple al realizar clic cobre la notificación
+				
+				this.close(); //Cierra la notificación
+			}
+        });
         $(thisAlert).addClass('alert-validate');
     }
 

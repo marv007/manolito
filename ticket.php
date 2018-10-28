@@ -4,6 +4,9 @@ require 'clases/manejadorTicket.php';
 require 'clases/class.archivo.php';
 require 'clases/manejadorArchivo.php';
 
+$mt = new ManejadorTicket();
+$ticket = new Ticket();
+
 
 if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
   $ma = new ManejadorArchivo();
@@ -23,23 +26,26 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
     $archivo->setRutaArchivo($destino);
 
     $ma->insertarArchivo($archivo);
+    $ticket->setIdArchivo($ma->obtenerId());
   } //fin validacion si archivo es distinto de null 
-  
+  else{
+    $ticket->setIdArchivo(NULL);
+  }
   
     //Capturando y guardando datos en BD
     $hoy = date('Y-m-d H:i:s');
 
-    $mt = new ManejadorTicket();
-    $ticket = new Ticket();
+    
 
     $ticket->setAsunto($_POST['asunto']);
     $ticket->setProblema($_POST['descripcion']);
     $ticket->setFechaInicio($hoy);
-    $ticket->setIdArchivo($ma->obtenerId());
+    
     
     
 
     $mt->insertarTicket($ticket);
+    
 
 }?>
     
@@ -146,14 +152,14 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
                   </span>
         
                   <div class="wrap-input800 validate-input" data-validate = "Escriba asunto">
-                    <input class="input800 " type="text" name="asunto" placeholder="Asunto">
+                    <input class="input800 " type="text" name="asunto" required="" placeholder="Asunto">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">              
                     </span>
                   </div>
         
                   <div class="wrap-input100 validate-input" data-validate = "Describa el problema">
-                    <textarea class="input-text-area" type="text" name="descripcion" placeholder="Descripción del problema"></textarea>
+                    <textarea class="input-text-area" type="text" name="descripcion" required="" placeholder="Descripción del problema"></textarea>
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">                      
                     </span>
@@ -184,7 +190,7 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
                                 </div>
                                <!--alert-->
                                <?php
-                        }else{ ?>
+                        }else if($_POST!=null){ ?>
                                
                        <?php }?>
 
@@ -212,10 +218,11 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
       </footer>
       -->
     </div> <!-- /container -->       
-       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+       
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
        
         <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/push.min.js"></script>
 
         <script src="js/main.js"></script>
         <!--Scrip para que desaparezca el mensaje de alerta en 4seg-->

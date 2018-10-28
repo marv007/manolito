@@ -15,7 +15,7 @@ class ManejadorArchivo extends mysqli{
             $rutaArchivo = $a->getRutaArchivo();
             
             //
-            $stmn = "INSERT INTO archivo(ID_archivo, nombre, ruta) values('".$idArchivo."','".$nombreArchivo."', '".$rutaArchivo."')";
+            $stmn = "INSERT INTO archivo(ID_archivo, nombre, ruta, created_date, created_by) values('".$idArchivo."','".$nombreArchivo."', '".$rutaArchivo."', SYSDATE(), USER())";
             $conn->execQuery($stmn);
             
 
@@ -57,7 +57,7 @@ class ManejadorArchivo extends mysqli{
     public function obtenerId(){
         try{ 
             $conn = conexion::getInstance();
-            $stmn = "SELECT ID_archivo from archivo order by ID_archivo desc limit 1 ";
+            $stmn = "SELECT ID_archivo from archivo WHERE status = 'active' order by ID_archivo desc limit 1 ";
             $resultado = $conn->execQuery($stmn);
             $ID = $resultado->fetch_assoc();
             $id = $ID['ID_archivo'];

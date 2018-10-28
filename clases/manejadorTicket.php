@@ -24,7 +24,12 @@ class ManejadorTicket extends mysqli{
 
             
             //
-            $stmn = "INSERT INTO ticket(ID_usuario, asunto, problema, solucion, fechaInicio, estado, prioridad, ID_archivo) values('".$idUsuario."','".$asunto."', '".$problema."', '".$solucion."', '".$fechaInicio."', '".$estado."', '".$prioridad."', '".$idArchivo."')";
+            if($idArchivo == NULL){
+                $stmn = "INSERT INTO ticket(ID_usuario, asunto, problema, solucion, fechaInicio, estado, prioridad, ID_archivo, created_date, created_by) VALUES('".$idUsuario."', '".$asunto."', '".$problema."', '".$solucion."', '".$fechaInicio."', '".$estado."', '".$prioridad."', NULL, SYSDATE(), USER())";
+            }else{
+                $stmn = "INSERT INTO ticket(ID_usuario, asunto, problema, solucion, fechaInicio, estado, prioridad, ID_archivo, created_date, created_by) VALUES('".$idUsuario."', '".$asunto."', '".$problema."', '".$solucion."', '".$fechaInicio."', '".$estado."', '".$prioridad."', '".$idArchivo."', SYSDATE(), USER())";
+            }
+            
             $conn->execQuery($stmn);
             
 
@@ -39,7 +44,7 @@ class ManejadorTicket extends mysqli{
     public function obtenerTicket(){
         try{
             $conn = conexion::getInstance();
-            $stmn = "SELECT * from ticket";
+            $stmn = "SELECT * from ticket WHERE status = 'active'";
             $resultado = $conn->execQuery($stmn);
             $Ticket = array();
             while($ticket = $resultado->fetch_assoc()){
@@ -113,10 +118,15 @@ class ManejadorTicket extends mysqli{
             $estado = $t->getEstado();
             $prioridad = $t->getPrioridad();
             $idArchivo = $t->getIdArchivo();
+            $idTicket = $t->getIdTicket();
 
             
+            //Soft DELETE ticket
+            $stmn = "UPDATE ticket SET status = 'deleted' WHERE ID_ticket ='".$idTicket."')";
+            $conn->execQuery($stmn);
 
-            //$stmn = "INSERT INTO ticket(ID_usuario, asunto, problema, solucion, fechaInicio, estado, prioridad, ID_archivo) values('".$idUsuario."','".$asunto."', '".$problema."', '".$solucion."', '".$fechaInicio."', '".$estado."', '".$prioridad."', '".$idArchivo."')";
+            //Soft DELETE archivo 
+            $stmn = "UPDATE archivo SET status = 'deleted' WHERE ID_archivo ='".$idArchivo."')";
             $conn->execQuery($stmn);
             
 
