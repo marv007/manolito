@@ -43,6 +43,7 @@ $(function() {
                 showValidate(input[i]);
                 check=false;
             }
+            
         }
 
         return check;
@@ -90,7 +91,14 @@ $(function() {
             if(validate(input1[i]) == false){
                 showValidate(input1[i]);
                 check=false;
+
             }
+            alert(input1[i].val().trim().match());
+        }
+        
+        if(input1.length>5){
+            showValidate(input1[0]);
+            check=false;
         }
 
         return check;
@@ -114,6 +122,8 @@ $(function() {
                 return false;
             }
         }
+
+        
     }
 
     function showValidate(input1) {
@@ -123,7 +133,7 @@ $(function() {
         
         
         Push.create("¡Error!", { //Titulo de la notificación
-			body: "Uno o más campos están vacíos.", //Texto del cuerpo de la notificación
+			body: "Su mensaje debe contener más caracteres.", //Texto del cuerpo de la notificación
 			icon: 'images/icons/Error.png', //Icono de la notificación
 			timeout: 6000, //Tiempo de duración de la notificación
 			onClick: function () {//Función que se cumple al realizar clic cobre la notificación
