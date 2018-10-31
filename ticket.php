@@ -126,8 +126,8 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
           </form>
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-            <li><a href="vista-tickets.php"><span class="glyphicon glyphicon-list-alt"></span>  Mis Tickets</a></li>
+            <li><a href="vista-tickets.php"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+            <li><a href="ticket.php"><span class="glyphicon glyphicon-list-alt"></span>  Nuevo ticket</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> Usuario</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Acerca de</a></li>
         </ul>
