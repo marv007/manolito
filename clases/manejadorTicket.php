@@ -1,4 +1,5 @@
 <?php
+
 require_once 'class.conexion.php';
 require_once 'class.ticket.php';
 
@@ -73,6 +74,41 @@ class ManejadorTicket extends mysqli{
         }
         
     }
+
+    //////////////////////////////////////////////////////
+    public function obtenerTickett($idUsuario){
+        try{
+            $conn = conexion::getInstance();
+            $stmn = "SELECT * from ticket WHERE status = 'active' AND ID_usuario= $idUsuario";
+            $resultado = $conn->execQuery($stmn);
+            $Ticket = array();
+            while($ticket = $resultado->fetch_assoc()){
+                 //crea un objeto ticket
+                 $tk = new Ticket();
+                 $tk->setIdTicket($ticket['ID_ticket']);
+                 $tk->setAsunto($ticket['asunto']);
+                 $tk->setProblema($ticket['problema']);
+                 $tk->setSolucion($ticket['solucion']);
+                     $time = strtotime($ticket['fechaInicio']);
+                     $myFormater = date("d/m/Y g:i A", $time);
+                 $tk->setFechaInicio($myFormater);
+                 $tk->setFechaFinal($ticket['fechaFinal']);
+                 $tk->setEstado($ticket['estado']);
+                 $tk->setPrioridad($ticket['prioridad']);
+                 //se a;ade el objeto ticket a la coleccion de objetos ticket
+                 array_push($Ticket, $tk);
+
+            }
+            //se cierra la conexion
+            $conn = null;
+            return $Ticket;
+            
+        }catch(exeption $e){
+            die("Error :". $e->getMessage());
+        }
+        
+    }
+    //////////////////////////////////////////////////////
 
     public function actualizarTicket(Ticket $t){
         try{

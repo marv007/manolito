@@ -2,15 +2,15 @@
 
 class Ticket{
   private $idTicket;
-  private $idUsuario = 1;
-  private $asunto;
-  private $problema;
+  private $idUsuario;
+  private $asunto;   
+  private $problema;  
   private $solucion = '';
-  private $fechaInicio = '';
+  private $fechaInicio = '';   
   private $fechaFinal = '';
   private $estado ='Activo';
   private $prioridad;
-  private $idArchivo;
+  private $idArchivo;   
   
   
 

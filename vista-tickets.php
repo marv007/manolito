@@ -1,9 +1,19 @@
 <?php
-require 'clases/manejadorTicket.php';
+session_start();
 
-$tk = new ManejadorTicket();
-$arrTicket = array();
-$arrTicket = $tk->obtenerTicket();
+if(!isset($_SESSION["usuario"])){
+  header("Location: index.php");
+}
+
+  require 'clases/manejadorTicket.php';
+
+  $tk = new ManejadorTicket();
+  $arrTicket = array();
+
+  $arrTicket = $tk->obtenerTickett($_SESSION['idUsuario']);
+
+
+
 ?>
 
 <!doctype html>
@@ -36,36 +46,7 @@ $arrTicket = $tk->obtenerTicket();
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <a class="navbar-brand" href="#">Ticket System</a>
-          <form class="navbar-form navbar-left">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Buscar Tickets">
-            </div>
-            <button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Buscar</button>
-          </form>
-
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="vista-tickets.php"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-            <li><a href="ticket.php"><span class="glyphicon glyphicon-list-alt"></span>  Nuevo ticket</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Usuario</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Acerca de</a></li>
-        </ul>
-       
-        </div><!--/.navbar-collapse -->
-      </div>
-    </nav>
+    <?php include "inc/navBar.php"; ?>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     
