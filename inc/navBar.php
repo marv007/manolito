@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -21,7 +22,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="vista-tickets.php"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
             <li><a href="ticket.php"><span class="glyphicon glyphicon-list-alt"></span>  Nuevo ticket</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION["usuario"];?></a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> <?php echo utf8_decode($_SESSION["usuario"]);?></a></li>
             <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Acerca de</a></li>
         </ul>
        

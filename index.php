@@ -1,4 +1,16 @@
-<?php  session_start();
+<?php 
+session_start();
+if(isset($_SESSION['idUsuario'])){
+	session_destroy();
+	session_start();
+	$_SESSION['no']=0;
+	echo "secion destruida y reiniciada";
+}
+
+if(!isset($_SESSION['no'])){
+	$_SESSION['no']=0;
+}
+
 
 ?>
 
@@ -28,8 +40,11 @@
 <body>
 	
 	<div class="limiter">
-		<div class="container-login100" >
+	     
+		<div class="container-login100">
+		    
 			<div class="wrap-login100">
+			    
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="images/logo.png" alt="IMG">
 				</div>

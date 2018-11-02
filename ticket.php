@@ -119,6 +119,7 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
             <div class="container-general">
                
         <div class="wrap-login800">
+             
             <form class="login800-form validate-form" action="ticket.php" enctype="multipart/form-data" method="POST" name="form">
                 <span class="general-form-title">
                     Redactar nuevo Ticket
