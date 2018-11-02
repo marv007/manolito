@@ -679,7 +679,7 @@ iframe {
   }
 }
 
-/*para scroll de la tabla*/
+/*para scroll de la tabla
 .table-fixed thead {
   width: 97%;
 }
@@ -695,4 +695,5 @@ iframe {
   float: left;
   border-bottom-width: 0;
 }
+*/
 

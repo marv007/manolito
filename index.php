@@ -1,3 +1,4 @@
+
 <?php 
 session_start();
 if(isset($_SESSION['idUsuario'])){
@@ -13,7 +14,6 @@ if(!isset($_SESSION['no'])){
 
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

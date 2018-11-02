@@ -50,6 +50,7 @@ if(!isset($_SESSION["usuario"])){
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     
+    
     <div class="limiter">
             
       <div class="container-general">
@@ -95,11 +96,14 @@ if(!isset($_SESSION["usuario"])){
           
           </div>
           
-          
-
+        
+        </div>
+        
       </div>
+      
     </div>
 
+   
   
 
       
