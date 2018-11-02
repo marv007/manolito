@@ -5,6 +5,17 @@
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
+
+
+.pull-left {
+  float: left !important;
+}
+.pull-right {
+  float: right !important;
+}
+
+
+
 @font-face {
   font-family: Poppins-Regular;
   src: url('../fonts/poppins/Poppins-Regular.ttf'); 

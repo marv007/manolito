@@ -55,8 +55,12 @@ if(!isset($_SESSION["usuario"])){
       <div class="container-general">
         <div class="wrap-login800" style="background-color: #e8e8e8; border-color: #000000;" >
         
-         <table class="table table-hover table-striped">
-           <h2><span class="glyphicon glyphicon-list-alt"></span> Mis Tickets</h2>
+        
+        <h3><span class="glyphicon glyphicon-list-alt"></span> Mis Tickets</h3>
+        
+        
+        <table class="table table-hover table-striped">
+           
             <thead style="background-color: #30914c; color: white" >
               <tr>
                 <th scope="col" class="th-sm">ID</th>
@@ -92,7 +96,8 @@ if(!isset($_SESSION["usuario"])){
             ?>
          
           </table>
-          
+          <a class = "pull-right" href="ticket.php"><input type="button" value="Nuevo ticket" style="border-radius: 5px; padding: 10px 7px; text-decoration: none; color: #fff; background-color: #30914c; margin: 5px;"></a>
+        
           </div>
           
           

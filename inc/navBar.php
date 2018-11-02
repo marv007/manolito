@@ -20,9 +20,18 @@
           </form>
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="vista-tickets.php"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-            <li><a href="ticket.php"><span class="glyphicon glyphicon-list-alt"></span>  Nuevo ticket</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> <?php echo utf8_decode($_SESSION["usuario"]);?></a></li>
+            <li data-toggle="tooltip" data-placement="bottom" title="Aquí encontrarás tus Tickets"><a href="vista-tickets.php"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
+            <li data-toggle="tooltip" data-placement="bottom" title="Redacta y envía un nuevo ticket"><a href="ticket.php"><span class="glyphicon glyphicon-plus"></span>  Nuevo ticket</a></li>
+            <li class="dropdown" data-toggle="tooltip" data-placement="bottom" title="Consultar datos del perfil o cerrar sesión"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <?php echo utf8_decode($_SESSION["usuario"]);?>
+            <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                      <li><a href="#">Ver Perfil</a></li>
+                      <li><a href="#">Cerrar sesión</a></li>
+                      
+                  </ul>    
+          
+        </li>
             <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Acerca de</a></li>
         </ul>
        
