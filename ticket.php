@@ -153,7 +153,7 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
                   <div class="  my-container-form-btn">
                       
                     <button class="login100-form-btn " style="width: 200px; margin-right: 8px;" data-toggle="modal" data-target="#myModal">
-                      Enviar Ticket
+                    <span class="glyphicon glyphicon-send"> </span>&nbspEnviar Ticket
                     </button>
                     <?php
                        if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){?>
@@ -169,8 +169,7 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
                        <?php }?>
 
       
-                    <button type="reset" class="cancell-form-btn" style="width: 200px; margin-left: 8px;">
-                      Reset
+                    <button type="reset" class="cancell-form-btn" style="width: 200px; margin-left: 8px;"><span class="glyphicon glyphicon-remove-sign"></span> &nbspReset
                     </button>
                   </div>
 

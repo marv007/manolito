@@ -5,7 +5,7 @@ if(isset($_SESSION['idUsuario'])){
 	session_destroy();
 	session_start();
 	$_SESSION['no']=0;
-	echo "secion destruida y reiniciada";
+	//cambiar esto y redirigir a vista-tickets
 }
 
 if(!isset($_SESSION['no'])){
@@ -57,7 +57,7 @@ if(!isset($_SESSION['no'])){
  <!--  alert -->
  <div class="alert alert-danger" role="alert" >
 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	<span class= "glyphicon glyphicon-ok"></span><strong>¡Error!</strong><br>¡El usuario ingresado no existe! 
+	<span class= "glyphicon glyphicon-ok"></span><strong>¡Error!</strong><br>¡Correo o contraseña no válidos! 
   </div>
  <!--alert-->
 <?php }
