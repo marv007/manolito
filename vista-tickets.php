@@ -76,46 +76,8 @@ if(!isset($_SESSION["usuario"])){
             <div class="row">
               <div class="col-md-12 contenido-scrollspy" data-spy="scroll" data-target="#menu" data-offset="0">
 
-                <table class="table table-hover table-striped" style= "max-width: 100% border:0px">
+            <table class="table table-hover table-striped" style= "max-width: 100% border:0px">
            
-<<<<<<< HEAD
-            <thead style="background-color: #30914c; color: white" >
-              <tr>
-                <th scope="col" class="th-sm">ID</th>
-                <th scope="col" class="th-sm">Asunto</th>
-                <th scope="col" class="th-sm">Mensaje</th>
-                <th scope="col" class="th-sm">Estado</th>
-                <th scope="col" class="th-sm">Prioridad</th>
-                <th scope="col" class="th-sm">Técnico Encargado</th>
-                <th scope="col" class="th-sm">Fecha añadido</th>
-              </tr>
-            </thead>
-         
-            <?php
-            $i = 0;
-            while($i < count($arrTicket)){
-                $a = $arrTicket[$i];
-            ?>
-            <tbody class="tabla-scroll" style="background-color: #d3d3d3">
-              <tr>
-                <td class="filterable-cell" scope="row"><?php echo $a->getIdTicket() ?></td>
-                <td class="filterable-cell"><?php echo $a->getAsunto() ?></td>
-                <td class="filterable-cell"><?php echo $a->getProblema() ?></td>
-                <td class="filterable-cell"><?php echo $a->getEstado() ?></td>
-                <td class="filterable-cell"><?php echo $a->getPrioridad() ?></td>
-                <td class="filterable-cell"></td>
-                <td class="filterable-cell"><?php echo $a->getfechaInicio() ?></td>
-
-              </tr>
-            </tbody>
-            <?php
-            $i++;
-            }
-            ?>
-         
-          </table>
-          <a class = "pull-right" href="ticket.php"><input type="button" value="Nuevo ticket" style="border-radius: 5px; padding: 10px 7px; text-decoration: none; color: #fff; background-color: #30914c; margin: 5px;"></a>
-=======
            <thead style="background-color: #30914c; color: white" >
              <tr>
                <th scope="col" class="th-sm">ID</th>
@@ -123,7 +85,7 @@ if(!isset($_SESSION["usuario"])){
                <th scope="col" class="th-sm">Mensaje</th>
                <th scope="col" class="th-sm">Estado</th>
                <th scope="col" class="th-sm">Prioridad</th>
-               <th scope="col" class="th-sm">Departamento</th>
+               <th scope="col" class="th-sm">Tec. Encargado</th>
                <th scope="col" class="th-sm">Fecha añadido</th>
              </tr>
            </thead>
@@ -149,7 +111,6 @@ if(!isset($_SESSION["usuario"])){
            $i++;
            }
            ?>
->>>>>>> 9c91bc905e865af9b0ced6336bb9c13a02ae7560
         
          </table>
 
@@ -161,15 +122,8 @@ if(!isset($_SESSION["usuario"])){
           
           </div>
           
-<<<<<<< HEAD
-        
-        </div>
-        
-      </div>
-=======
           
 
->>>>>>> 9c91bc905e865af9b0ced6336bb9c13a02ae7560
       
     </div>
 
@@ -184,7 +138,7 @@ if(!isset($_SESSION["usuario"])){
       -->
     </div> <!-- /container -->       
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-
+        
         <script src="js/vendor/bootstrap.min.js"></script>
 
         <script src="js/main.js"></script>

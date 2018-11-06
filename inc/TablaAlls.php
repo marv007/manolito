@@ -21,7 +21,7 @@
                                           $a = $arrTicket[$i];
                                ?>
 
-                                <tbody>
+                                <tbody id="myTable">
                                     
                                     <tr>
                                         <td><?php echo $a->getIdTicket() ?></td>
@@ -40,7 +40,7 @@
                                      }
                                 ?>
                             </table>
-                           
+                            <ul class="pagination pagination-lg pager" id="myPager"></ul>
                                 
                            
                         

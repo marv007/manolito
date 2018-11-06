@@ -34,10 +34,10 @@ $contResueltos =0;
 $i = 0;
 while($i < count($arrTicket)){
     if($arrTicket[$i]->getSolucion()==""){
-      $arrPen[$i] = $arrTicket[$i];
+      $arrPen[] = $arrTicket[$i];
       $contPendientes++;
     }else{
-      $arrRes[$i] = $arrTicket[$i];
+      $arrRes[] = $arrTicket[$i];
       $contResueltos++;
     }
     $i++;
@@ -72,7 +72,7 @@ while($i < count($arrTicket)){
         <link rel="stylesheet" href="css/main.css">
 
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     </head>
     <body>
         <!--NAVBAR-->
@@ -147,7 +147,32 @@ while($i < count($arrTicket)){
                         </div>
                     </div>
                 </div>
+
+                <div class="tab-pane" id="ticketsproc">  
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <?php
                 
+                             include "inc/TablaPen.php";
+                
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane" id="ticketsre">  
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <?php
+                
+                             include "inc/TablaRes.php";
+                
+                            ?>
+                        </div>
+                    </div>
+                </div>
                 
                 
                 
@@ -193,6 +218,8 @@ $(document).ready(function() {
 $('#stac').stacktable();
 });
 </script>
+<!--===============================================================================================-->
+<!--===============================================================================================-->
 <!--===============================================================================================-->
     </body>
 </html>

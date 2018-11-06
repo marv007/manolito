@@ -52,7 +52,7 @@
                                 ?>
                             </table>
                            
-                                <h2 class="text-center">No hay tickets registrados en el sistema</h2>
+                               <!-- <h2 class="text-center">No hay tickets registrados en el sistema</h2> -->
                            
                         </div>
                        <!--PAGINADOR-->
