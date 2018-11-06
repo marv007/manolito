@@ -58,7 +58,7 @@ if(!isset($_SESSION["usuario"])){
         -->
         <div class="container">
         <br>
-        <h3>Panel Administrativo</h3>
+        <h3>Panel de Tickets</h3>
         <a class = "pull-right" href="ticket.php"><input type="button" value="Nuevo ticket" style="border-radius: 5px; padding: 10px 7px; text-decoration: none; color: #fff; background-color: #30914c; margin: 5px;"></a>
         <br>
         <ul class="nav nav-tabs" style= "width: 100%">
@@ -70,12 +70,12 @@ if(!isset($_SESSION["usuario"])){
             </ul>
 
 
-        <div class="tab-content" style= "max-height: 75vh; overflow: auto; padding:0px">
+        <div class="tab-content">
           <div class="tab-pane active" id="ticketsin">  
             <div class="row">
               <div class="col-md-12 contenido-scrollspy" data-spy="scroll" data-target="#menu" data-offset="0">
 
-                <table class="table table-hover table-striped" style= "max-width: 100% border:0px">
+                <table class="table table-hover table-striped">
            
            <thead style="background-color: #30914c; color: white" >
              <tr>
@@ -96,9 +96,9 @@ if(!isset($_SESSION["usuario"])){
            ?>
            <tbody class="tabla-scroll" style="background-color: #d3d3d3">
              <tr>
-               <td class="filterable-cell editar" scope="row"><?php echo $a->getIdTicket() ?></td>
+               <td class="filterable-cell" scope="row"><?php echo $a->getIdTicket() ?></td>
                <td class="filterable-cell"><?php echo $a->getAsunto() ?></td>
-               <td class="filterable-cell" style="max-width: 45vh; overflow: hidden" ><?php echo $a->getProblema() ?></td>
+               <td class="filterable-cell"><?php echo $a->getProblema() ?></td>
                <td class="filterable-cell"><?php echo $a->getEstado() ?></td>
                <td class="filterable-cell"><?php echo $a->getPrioridad() ?></td>
                <td class="filterable-cell"></td>
