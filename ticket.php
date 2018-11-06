@@ -197,6 +197,8 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/push.min.js"></script>
 
+       
+
         <script src="js/main.js"></script>
         <!--Scrip para que desaparezca el mensaje de alerta en 4seg-->
         <script>
