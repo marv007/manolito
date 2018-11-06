@@ -34,10 +34,10 @@ $contResueltos =0;
 $i = 0;
 while($i < count($arrTicket)){
     if($arrTicket[$i]->getSolucion()==""){
-      $arrPen[$i] = $arrTicket[$i];
+      $arrPen[] = $arrTicket[$i];
       $contPendientes++;
     }else{
-      $arrRes[$i] = $arrTicket[$i];
+      $arrRes[] = $arrTicket[$i];
       $contResueltos++;
     }
     $i++;
@@ -55,7 +55,7 @@ while($i < count($arrTicket)){
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Vista Tickets</title>
+        <title>Dashboard</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/png" href="images/icons/lista.png"/>
@@ -128,7 +128,7 @@ while($i < count($arrTicket)){
                         <div class="col-md-12">
                         
                             <?php 
-                                //include "inc/TablaPen.php";
+                                include "inc/TablaPen.php";
                                 
                             ?>
                         </div>
@@ -148,26 +148,72 @@ while($i < count($arrTicket)){
                     </div>
                 </div>
                 
+                <div class="tab-pane" id="ticketsre">  
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <?php
+                
+                                include "inc/TablaRes.php";
+                
+                            ?>
+                        </div>
+                    </div>
+                </div>
                 
                 
                 
-            </div><!--contenido de pestañas-->
-            
+                
+            </div> <!--contenido de pestañas-->
+        <!--fromulario modal-->
+
         
         <div class="modal fade" id="miModal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close" aria-hidden="true" data-dismiss="modal">&times;</button>
-                         <h4 class="modal-title">Titulo del modal</h4>
+                         <h4 class="modal-title"> <?php echo $a->getAsunto() ?></h4>
                     </div>
                     <div class="modal-body">
+                        <h4>Informacion del ticket</h4>
+                        <strong>Problema: </strong><?php echo $a->getProblema() ?> <br>
+                        <hr>
+                        <h4>Asignar ticket</h4>
+                        <strong>Depatamento: </strong>
+                        <select>
+                            <option value="it">IT</option>
+                            <option value="mant">Mantenimiento</option>
+                        </select>
+                        <br>
+                        <br>
+                        <strong>Tecnico: </strong>
+                        <select> <!--llenado de combo automatico -->
+                        <option value="tec1">tecnico 1</option>
+                        <option value="tec2">tecnico 2</option>
+                        </select>
+                        <br>
+                        <br>
+                        <strong>Prioridad: </strong>
+                        <select>
+                            <option value="alta">Alta</option>
+                            <option value="media">Media</option>
+                            <option value="baja">Baja</option>
+                        </select>
 
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary">Aceptar</button>
                     </div>
                 
                 </div>
             </div>
         </div>
+          
+    
+
+
+
         </div><!--container principal-->
 
 

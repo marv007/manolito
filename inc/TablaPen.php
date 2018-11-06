@@ -21,7 +21,7 @@
                                           $a = $arrPen[$i];
                                ?>
 
-                                <tbody>
+                                <tbody data-toggle="modal" data-target="#miModal">
                                     
                                     <tr>
                                         <td><?php echo $a->getIdTicket() ?></td>

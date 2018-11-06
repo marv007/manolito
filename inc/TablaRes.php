@@ -52,41 +52,10 @@
                                 ?>
                             </table>
                            
-                                <h2 class="text-center">No hay tickets registrados en el sistema</h2>
+                                
                            
                         </div>
-                       <!--PAGINADOR-->
-                        <nav aria-label="Page navigation" class="text-center">
-                            <ul class="pagination">
-                               
-                                    <li class="disabled">
-                                        <a aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                               
-                                    <li>
-                                        <a href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                
-                                
-                                
-                                    <li class="disabled">
-                                        <a aria-label="Previous">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                               
-                                    <li>
-                                        <a href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                               
-                            </ul>
-                        </nav>
+                       
                         
                     </div>
                 </div>

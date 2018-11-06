@@ -24,7 +24,7 @@ if($existe!=0){
         $_SESSION['idUsuario'] = $rs['ID_usuario'];
     }
 
-    header("Location: ../vista-tickets.php");
+    header("Location: ../dashboard.php");
 
 
 }else{
