@@ -69,7 +69,7 @@ if(!isset($_SESSION["usuario"])){
                 <th scope="col" class="th-sm">Mensaje</th>
                 <th scope="col" class="th-sm">Estado</th>
                 <th scope="col" class="th-sm">Prioridad</th>
-                <th scope="col" class="th-sm">Departamento</th>
+                <th scope="col" class="th-sm">Técnico Encargado</th>
                 <th scope="col" class="th-sm">Fecha añadido</th>
               </tr>
             </thead>

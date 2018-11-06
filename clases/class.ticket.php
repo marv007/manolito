@@ -10,7 +10,8 @@ class Ticket{
   private $fechaFinal = '';
   private $estado ='Activo';
   private $prioridad;
-  private $idArchivo;   
+  private $idArchivo; 
+  private $idTecnico;  
   
   
 
@@ -53,6 +54,10 @@ class Ticket{
 
   public function getIdArchivo(){
     return $this->idArchivo;
+  }
+
+  public function getIdTecnico(){
+    return $this->idTecnico;
   }
 
   //////////////setters

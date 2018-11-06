@@ -1,10 +1,12 @@
 
 <?php 
 session_start();
+
 if(isset($_SESSION['idUsuario'])){
 	session_destroy();
 	session_start();
 	$_SESSION['no']=0;
+	
 	//cambiar esto y redirigir a vista-tickets
 }
 

@@ -27,7 +27,7 @@
                   </a>
                   <ul class="dropdown-menu">
                       <li><a href="#">Ver Perfil</a></li>
-                      <li><a href="#">Cerrar sesión</a></li>
+                      <li><a href="index.php">Cerrar sesión</a></li>
                       
                   </ul>    
           

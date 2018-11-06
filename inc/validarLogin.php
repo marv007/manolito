@@ -28,6 +28,7 @@ if($existe!=0){
 
 
 }else{
+    $_SESSION['correo'] = $_POST['usuario'];
     $_SESSION['no'] = 1;
     header("Location: ../index.php");
 
