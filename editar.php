@@ -144,17 +144,17 @@
                         </div>
                         
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Tecnico:</label>
+                            <label class="col-sm-2 control-label">Técnico:</label>
                             <div class='col-sm-10'>
                                 <div class="input-group">
                         <select class="form-control" name="tecnico">
                             <option value="<?php echo $reg['estado_ticket']?>">Sin tecnico (Actual)</option>
                             <?php
-                                if ($ticket->getIdTecnico)
+                                
                                 $i = 0;
                                 while($i < count($tec)){
                                      ?>
-                                     <option value="<?php echo $tec->getIdUsuario() ?>"><?php echo $tec->getNombre() ?></option>
+                                     <option value="<?php echo $tec[$i]->getIdUsuario() ?>"><?php echo $tec[$i]->getNombre() ?></option>
                                      <?php
                                 
                                     $i++;
@@ -165,6 +165,30 @@
                         </div>
                         </div>
                         </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Prioridad:</label>
+                            <div class='col-sm-10'>
+                                <div class="input-group">
+                        <select class="form-control" name="tecnico">
+                            <?php 
+                            $prioridad = $ticket->getPrioridad();
+                            if($ticket->getPrioridad()==""){
+                                $prioridad = "Sin Prioridad";  
+                             }?>
+                            <option value="<?php echo $prioridad?>"><?php echo $prioridad ?> (Actual)</option>
+                            
+                            <option value="Alta">Alta</option>
+                            <option value="Media">Media</option>
+                            <option value="Baja">Baja</option>
+                            
+                        </select>
+                        </div>
+                        </div>
+                        </div>
+
+                        
+
                     <br>
                     
                         <div class="form-group">
