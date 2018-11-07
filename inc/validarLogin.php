@@ -23,11 +23,12 @@ if($existe!=0){
         $_SESSION['usuario'] = $rs['nombre'];
         $_SESSION['idUsuario'] = $rs['ID_usuario'];
         $_SESSION['idRol'] = $rs['ID_rol'];
+        $_SESSION['idDepartamento'] = $rs['ID_departamento'];
     }
     if($_SESSION['idRol']==1){
         header("Location: ../dashboard.php");
     }else{
-        header("Location: ../vista-tickets.php");
+        header("Location: ../dashboard.php");
     }
     
 

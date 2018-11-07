@@ -17,7 +17,7 @@ class ManejadorUsuario extends mysqli{
              //crea un objeto usuario
              $us = new Usuario();
              $us->setIdUsuario($user['ID_usuario']);
-             $us->setDepartamento($user['departamento']);
+             $us->setDepartamento($user['ID_departamento']);
              $us->setNombre($user['nombre']);
              $us->setCorreo($user['correo']);
              $us->setPassword($user['password']);

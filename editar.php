@@ -22,7 +22,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es"> <!--<![endif]-->
     <head>
     <title>Administrar Tickets</title>
         <?php include "./inc/links.php"; ?> 
@@ -40,7 +40,7 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="page-header">
-                <h1 class="animated lightSpeedIn">Información del Ticket</h1>
+                <h2 class="animated lightSpeedIn">Información del Ticket</h2>
                 
                 <p class="pull-right text-primary"><br>
                   <strong>

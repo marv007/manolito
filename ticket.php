@@ -10,14 +10,12 @@ require 'clases/manejadorTicket.php';
 require 'clases/class.archivo.php';
 require 'clases/manejadorArchivo.php';
 
-      //crear objetos manejador ticket y ticket
 $mt = new ManejadorTicket();
 $ticket = new Ticket();
 
-      //validacion si el campo archivo no esta vacio
+
 if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
   $ma = new ManejadorArchivo();
- 
   if(!empty($_FILES['Fichier1']['name'])){
      //guardando archivos en servidor
     $nombre_archivo = $_FILES['Fichier1']['name'];
@@ -44,13 +42,12 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
     $hoy = date('Y-m-d H:i:s');
    
     
-    //agregando atributos al ticket
+
     $ticket->setAsunto($_POST['asunto']);
     $ticket->setProblema($_POST['descripcion']);
     $ticket->setFechaInicio($hoy);
     $ticket->setIdUsuario($_SESSION['idUsuario']);
     
-    //manejador ticket inserta el ticket
     $mt->insertarTicket($ticket);
     
 
@@ -112,7 +109,7 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
 
     <?php include "inc/navBar.php"; ?>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
+    
      
      
     
