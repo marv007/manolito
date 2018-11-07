@@ -10,31 +10,19 @@
                                         <th>Estado</th>
                                         <th>Prioridad</th>
                                         <th>Departamento</th>
-                                        <th>Fecha creado</th>
-                                        <th>Editar</th>
+                                        <th>Tec. Encargado</th>
+                                        
                                         
                                     </tr>
                                 </thead>
 
                                 <?php
-                                
-                                
                                      $i = 0;
-                                     while($i < count($arrPen)){
-                                          $a = $arrPen[$i];
-                                          $md = new ManejadorDepartamento();                                                                                  
-                                          $idUs = $a->getIdUsuario();
-                                          $mu = new ManejadorUsuario();
-                                          $usu = array();               
-                                          $usu = $mu->obtenerUsuario($a->getIdUsuario());                                        
-                                          $dep = $md->obtenerDepartamento($usu->getIdDepartamento());
-                                            
-                                          
-                                          
-                                         
+                                     while($i < count($arrTicket)){
+                                          $a = $arrTicket[$i];
                                ?>
 
-                                <tbody >
+                                <tbody id="myTable">
                                     
                                     <tr>
                                         <td><?php echo $a->getIdTicket() ?></td>
@@ -42,11 +30,9 @@
                                         <td style="max-width: 45vh; overflow: hidden;"><?php echo $a->getProblema() ?></td>
                                         <td><?php echo $a->getEstado() ?></td>
                                         <td><?php echo $a->getPrioridad() ?></td>
-                                        <td><?php echo utf8_encode($dep->getNombre())?></td>
-                                        <td><?php echo $a->getfechaInicio() ?></td>
-                                        <td class="text-center">
-                                            <a href="editar.php?id=<?php echo $a->getIdTicket()?>" class="btn btn-sm btn-warning" style="font-size: 16px"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        </td>
+                                        <td>Departamento</td>
+                                        <td>Técnico</td>
+                                        
                                         
                                     </tr>
                                     
@@ -56,7 +42,8 @@
                                      }
                                 ?>
                             </table>
-                           
+                            <ul class="pagination pagination-lg pager" id="myPager"></ul>
+                                
                            
                         
                 </div>

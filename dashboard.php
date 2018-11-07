@@ -6,12 +6,14 @@ if(!isset($_SESSION["usuario"])){
 }
 
   require 'clases/manejadorTicket.php';
+  require 'clases/manejadorDepartamento.php';
+  require 'clases/manejadorUsuario.php';
 
  
 //////////////////////////////////////////////////////////
+    $md = new ManejadorDepartamento(); 
+    $tk = new ManejadorTicket();
 
-$tk = new ManejadorTicket();
-$arrTicket = array();
 
 //Sirve para mostrar las distintas tablas
 if(!isset($_SESSION['tabla'])){
@@ -19,29 +21,7 @@ if(!isset($_SESSION['tabla'])){
 }
 
 
-//Arreglo con todos los tickets
-$arrTicket = $tk->obtenerTickets();
 
-//Arreglo de solucionados
-$arrRes = array();
-
-//Arreglo de pendientes
-$arrPen = array();
-
-$contador = count($arrTicket);
-$contPendientes = 0;
-$contResueltos =0;
-$i = 0;
-while($i < count($arrTicket)){
-    if($arrTicket[$i]->getSolucion()==""){
-      $arrPen[] = $arrTicket[$i];
-      $contPendientes++;
-    }else{
-      $arrRes[] = $arrTicket[$i];
-      $contResueltos++;
-    }
-    $i++;
-}
 
 
 
@@ -51,7 +31,7 @@ while($i < count($arrTicket)){
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -83,13 +63,45 @@ while($i < count($arrTicket)){
     <?php include "inc/navBar.php"; ?>
       
     <!--Si es administrador-->
-     <?php if($_SESSION['idRol']==1){?>
+     <?php if($_SESSION['idRol']==1){
+        
+        $arrTicket = array(); 
+
+        //Arreglo con todos los tickets
+        $arrTicket = $tk->obtenerTickets();
+
+        //Arreglo de solucionados
+        $arrRes = array();
+
+        //Arreglo de pendientes
+        $arrPen = array();
+
+        $contador = count($arrTicket);
+        $contPendientes = 0;
+        $contResueltos =0;
+        $i = 0;
+        while($i < count($arrTicket)){
+            if($arrTicket[$i]->getSolucion()==""){
+            $arrPen[] = $arrTicket[$i];
+            $contPendientes++;
+            }else{
+            $arrRes[] = $arrTicket[$i];
+            $contResueltos++;
+            }
+            $i++;
+        }
+         
+     ?>
+
+    
+
+
     <!-- ENCABEZADO -->
     <div class="container" style="color: white">
           <div class="row">
             <div class="col-sm-12">
               <br>
-                <h3>Panel Administrativo</h3>                
+                <h3>Panel Administrativo <a class ="pull-right text-primary" style="color:white" href="vista-tickets.php">Ver mis tickets</a></h3>                
                 <p class="pull-right text-primary">
                   <strong style="color:white">
                   <?php include "inc/timezone.php"; ?>
@@ -104,10 +116,11 @@ while($i < count($arrTicket)){
             <div class="row">
                 <div class="col-md-12">
                     <ul class="nav nav-tabs nav-justified" >
-                        <li class="active"><a href="#ticketsp" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Tickets pendientes&nbsp;&nbsp; <span class="badge" style="background-color:#f55210; font-size: 18px"><?php echo $contPendientes?></span></a></li>
-                        <li><a href="#ticketsall" data-toggle="tab"><i class="fa fa-list" ></i>&nbsp;&nbsp;Todos los tickets&nbsp;&nbsp; <?php $_SESSION['tabla']=="todos"?><span class="badge" style="background-color:#3498db; font-size: 18px"><?php echo $contador?></span></a></li>                        
-                        <li><a href="#ticketsproc" data-toggle="tab"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Tickets en proceso&nbsp;&nbsp;<span class="badge" style="background-color: #f7822c; font-size: 18px">0</span></a></li>
-                        <li><a href="#ticketsre" data-toggle="tab"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Tickets resueltos&nbsp;&nbsp; <?php $_SESSION['tabla']=="resuelto"?><span class="badge" style="background-color: #6ada13; font-size: 18px"><?php echo $contResueltos?></span></a></li>
+                    <li class="active"><a href="#ticketsp" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Tickets pendientes&nbsp;&nbsp; <span class="badge" style="background-color:#f55210"><?php echo $contPendientes?></span></a></li>
+                        <li><a href="#ticketsproc" data-toggle="tab"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Tickets en proceso&nbsp;&nbsp;<span class="badge" style="background-color: #f7822c">0</span></a></li>
+                        <li><a href="#ticketsre" data-toggle="tab"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Tickets resueltos&nbsp;&nbsp; <?php $_SESSION['tabla']=="resuelto"?><span class="badge" style="background-color:  #6ada13"><?php echo $contResueltos?></span></a></li>
+                        <li><a href="#ticketsall" data-toggle="tab"><i class="fa fa-list" ></i>&nbsp;&nbsp;Todos los tickets&nbsp;&nbsp; <?php $_SESSION['tabla']=="todos"?><span class="badge" style="background-color:#3498db"><?php echo $contador?></span></a></li>                        
+                         
                     </ul>
                 </div>
             </div>
@@ -222,80 +235,220 @@ while($i < count($arrTicket)){
 
 
         </div><!--container principal-->
-     <?php }else{?>
-        <div class="limiter">
-            
-     
-        
-            <!-- <div class="wrap-login800" style="background-color: #e8e8e8; border-color: #000000; width: 100%; height: 92vh; " >
-            -->
-            <div class="container">
-            <br>
-            <h3>Panel Administrativo</h3>
-            <a class = "pull-right" href="ticket.php"><input type="button" value="Nuevo ticket" style="border-radius: 5px; padding: 10px 7px; text-decoration: none; color: #fff; background-color: #30914c; margin: 5px;"></a>
-            <br>
-            <ul class="nav nav-tabs" style= "width: 100%">
-                    <li class="active"><a href="#ticketsin" data-toggle="tab">Tickets pendientes</a></li>
-                    <li><a href="#ticketsproc" data-toggle="tab">Tickets en proceso</a></li>
-                    <li><a href="#ticketsre" data-toggle="tab">Tickets resueltos</a></li>
-                    <li><a href="#mytickets" data-toggle="tab">Mis tickets</a></li>
-                    
-                </ul>
-    
-    
-            <div class="tab-content" style= "max-height: 75vh; overflow: auto; padding:0px">
-              <div class="tab-pane active" id="ticketsin">  
-                <div class="row">
-                  <div class="col-md-12 contenido-scrollspy" data-spy="scroll" data-target="#menu" data-offset="0">
-    
-                <table class="table table-hover table-striped" style= "max-width: 100% border:0px">
-               
-               <thead style="background-color: #30914c; color: white" >
-                 <tr>
-                   <th scope="col" class="th-sm">ID</th>
-                   <th scope="col" class="th-sm">Asunto</th>
-                   <th scope="col" class="th-sm">Mensaje</th>
-                   <th scope="col" class="th-sm">Estado</th>
-                   <th scope="col" class="th-sm">Prioridad</th>
-                   <th scope="col" class="th-sm">Tec. Encargado</th>
-                   <th scope="col" class="th-sm">Fecha añadido</th>
-                 </tr>
-               </thead>
-            
-               <?php
-               $i = 0;
-               while($i < count($arrTicket)){
-                   $a = $arrTicket[$i];
-               ?>
-               <tbody class="tabla-scroll" style="background-color: #d3d3d3">
-                 <tr>
-                   <td class="filterable-cell editar" scope="row"><?php echo $a->getIdTicket() ?></td>
-                   <td class="filterable-cell"><?php echo $a->getAsunto() ?></td>
-                   <td class="filterable-cell" style="max-width: 45vh; overflow: hidden" ><?php echo $a->getProblema() ?></td>
-                   <td class="filterable-cell"><?php echo $a->getEstado() ?></td>
-                   <td class="filterable-cell"><?php echo $a->getPrioridad() ?></td>
-                   <td class="filterable-cell"></td>
-                   <td class="filterable-cell"><?php echo $a->getfechaInicio() ?></td>
-    
-                 </tr>
-               </tbody>
-               <?php
-               $i++;
-               }
-               ?>
-            
-             </table>
-    
-                        </div>
-                      
-                    </div>
-    
-                </div>
-              
-              </div>
-       
+     <?php }else if($_SESSION['idRol']==2){
+         
+         $arrTicket = array(); 
+ 
+         //Arreglo con todos los tickets
+         $arrTicket = $tk->obtenerTickett($_SESSION['idUsuario']);
+         
+ 
+         //Arreglo de solucionados
+         $arrRes = array();
+ 
+         //Arreglo de pendientes
+         $arrPen = array();
+ 
+         $contador = count($arrTicket);
+         $contPendientes = 0;
+         $contResueltos =0;
+         $i = 0;
+         while($i < count($arrTicket)){
+             if($arrTicket[$i]->getSolucion()==""){
+             $arrPen[] = $arrTicket[$i];
+             $contPendientes++;
+             }else{
+             $arrRes[] = $arrTicket[$i];
+             $contResueltos++;
+             }
+             $i++;
+         }
+     ?>
+        <div class="container" style="color: white">
+          <div class="row">
+            <div class="col-sm-12">
+              <br>
+                <h3>Tickets por resolver<a class ="pull-right text-primary" style="color:white" href="vista-tickets.php">Ver mis tickets</a></h3>                
+                <p class="pull-right text-primary">
+                  <strong style="color:white">
+                  <?php include "inc/timezone.php"; ?>
+                 </strong>
+               </p>
+            </div>
         </div>
-     <?php }?>
+    </div>
+    
+    
+
+      
+        <div class="container" style="background-color: #eaedfa">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs nav-justified" >
+                        <li class="active"><a href="#ticketsp" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Tickets pendientes&nbsp;&nbsp; <span class="badge" style="background-color:#f55210"><?php echo $contPendientes?></span></a></li>
+                        <li><a href="#ticketsproc" data-toggle="tab"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Tickets en proceso&nbsp;&nbsp;<span class="badge" style="background-color: #f7822c">0</span></a></li>
+                        <li><a href="#ticketsre" data-toggle="tab"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Tickets resueltos&nbsp;&nbsp; <?php $_SESSION['tabla']=="resuelto"?><span class="badge" style="background-color:  #6ada13"><?php echo $contResueltos?></span></a></li>
+                        <li><a href="#ticketsall" data-toggle="tab"><i class="fa fa-list" ></i>&nbsp;&nbsp;Todos los tickets&nbsp;&nbsp; <?php $_SESSION['tabla']=="todos"?><span class="badge" style="background-color:#3498db"><?php echo $contador?></span></a></li>                        
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+            
+
+            <div class="tab-content" style= "max-height: 73vh; overflow: auto; padding:0px; overflow-x: hidden;">
+                
+                <div class="tab-pane active" id="ticketsp">
+                    <div class="row">
+                        <div class="col-md-12">
+                        
+                            <?php 
+                                include "inc/TablaPen.php";
+                                
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane" id="ticketsall">  
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <?php
+                
+                                include "inc/TablaAlls.php";
+                
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane" id="ticketsre">  
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <?php
+                
+                                include "inc/TablaRes.php";
+                
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                
+            </div>
+     <?php } else {
+        
+        $arrTicket = array(); 
+
+        //Arreglo con todos los tickets
+        $arrTicket = $tk->obtenerTickett($_SESSION['idUsuario']);
+        
+
+        //Arreglo de solucionados
+        $arrRes = array();
+
+        //Arreglo de pendientes
+        $arrPen = array();
+
+        $contador = count($arrTicket);
+        $contPendientes = 0;
+        $contResueltos =0;
+        $i = 0;
+        while($i < count($arrTicket)){
+            if($arrTicket[$i]->getSolucion()==""){
+            $arrPen[] = $arrTicket[$i];
+            $contPendientes++;
+            }else{
+            $arrRes[] = $arrTicket[$i];
+            $contResueltos++;
+            }
+            $i++;
+        }
+         
+     ?>
+
+         <div class="container" style="color: white">
+          <div class="row">
+            <div class="col-sm-12">
+              <br>
+                <h3>Mis Tickets</h3>                
+                <p class="pull-right text-primary">
+                  <strong style="color:white">
+                  <?php include "inc/timezone.php"; ?>
+                 </strong>
+               </p>
+            </div>
+        </div>
+    </div>
+    
+    
+
+      
+        <div class="container" style="background-color: #eaedfa">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs nav-justified" >
+                        <li class="active"><a href="#ticketsp" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Tickets pendientes&nbsp;&nbsp; <span class="badge" style="background-color:#f55210"><?php echo $contPendientes?></span></a></li>
+                        <li><a href="#ticketsproc" data-toggle="tab"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Tickets en proceso&nbsp;&nbsp;<span class="badge" style="background-color: #f7822c">0</span></a></li>
+                        <li><a href="#ticketsre" data-toggle="tab"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Tickets resueltos&nbsp;&nbsp; <?php $_SESSION['tabla']=="resuelto"?><span class="badge" style="background-color:  #6ada13"><?php echo $contResueltos?></span></a></li>
+                        <li><a href="#ticketsall" data-toggle="tab"><i class="fa fa-list" ></i>&nbsp;&nbsp;Todos los tickets&nbsp;&nbsp; <?php $_SESSION['tabla']=="todos"?><span class="badge" style="background-color:#3498db"><?php echo $contador?></span></a></li>                        
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+            
+
+            <div class="tab-content" style= "max-height: 73vh; overflow: auto; padding:0px; overflow-x: hidden;">
+                
+                <div class="tab-pane active" id="ticketsp">
+                    <div class="row">
+                        <div class="col-md-12">
+                        
+                            <?php 
+                                include "inc/TablaPenU.php";
+                                
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane" id="ticketsall">  
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <?php
+                
+                                include "inc/TablaAlls.php";
+                
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane" id="ticketsre">  
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <?php
+                
+                                include "inc/TablaRes.php";
+                
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                
+            </div>
+
+     <?php } ?>
  <!--////////////////////////////////////////////////////////////////////////////////////////////////////////-->
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 

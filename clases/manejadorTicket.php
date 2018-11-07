@@ -51,6 +51,7 @@ class ManejadorTicket extends mysqli{
             while($ticket = $resultado->fetch_assoc()){
                  //crea un objeto ticket
                  $tk = new Ticket();
+                 $tk->setIdUsuario($ticket['ID_usuario']);
                  $tk->setIdTicket($ticket['ID_ticket']);
                  $tk->setAsunto($ticket['asunto']);
                  $tk->setProblema($ticket['problema']);

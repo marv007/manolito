@@ -7,6 +7,7 @@
 
   require 'clases/manejadorTicket.php';
   require 'clases/manejadorUsuario.php';
+  require 'clases/manejadorDepartamento.php';
  
   //Se usa el manejador ticket para ir a traer un tiquet especifico
   $tk = new ManejadorTicket();
@@ -15,6 +16,10 @@
   //se usa manejador usuario para ir a traer un usuario en especifico
   $us = new ManejadorUsuario();
   $usuario = $us->obtenerUsuario($ticket->getIdUsuario());
+  $md = new ManejadorDepartamento();
+  $dep = $md->obtenerDepartamento($usuario->getIdDepartamento());
+  $tec = $us->obtenerTecnicos();
+
 
  
  ?>
@@ -22,7 +27,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es"> <!--<![endif]-->
     <head>
     <title>Administrar Tickets</title>
         <?php include "./inc/links.php"; ?> 
@@ -40,7 +45,7 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="page-header">
-                <h1 class="animated lightSpeedIn">Información del Ticket</h1>
+                <h2 class="animated lightSpeedIn">Información del Ticket</h2>
                 
                 <p class="pull-right text-primary"><br>
                   <strong>
@@ -84,7 +89,7 @@
                                         <option value="<?php echo $reg['estado_ticket']?>"><?php echo $ticket->getEstado();?> (Actual)</option>
                                         <option value="Pendiente">Activo</option>
                                         <option value="En proceso">Pausa</option>
-                                        <option value="Resuelto">Resuelto</option>
+                                        <option value="Resuelto">Solucionado</option>
                                       </select>
                                     <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
                                 </div>
@@ -115,7 +120,7 @@
                           <label  class="col-sm-2 control-label">Departamento</label>
                           <div class="col-sm-10">
                               <div class='input-group'>
-                                  <input type="text" readonly="" class="form-control"  name="departamento_ticket" readonly="" value="Departamento?">
+                                  <input type="text" readonly="" class="form-control"  name="departamento_ticket" readonly="" value="<?php echo utf8_encode($dep->getNombre())?>">
                                 <span class="input-group-addon"><i class="fa fa-users"></i></span>
                               </div> 
                           </div>
@@ -137,7 +142,29 @@
                               <textarea class="form-control" readonly="" rows="3"  name="mensaje_ticket" readonly=""><?php echo $ticket->getProblema()?></textarea>
                           </div>
                         </div>
-                    
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Tecnico:</label>
+                            <div class='col-sm-10'>
+                                <div class="input-group">
+                        <select class="form-control" name="tecnico">
+                            <option value="<?php echo $reg['estado_ticket']?>">Sin tecnico (Actual)</option>
+                            <?php
+                                if ($ticket->getIdTecnico)
+                                $i = 0;
+                                while($i < count($tec)){
+                                     ?>
+                                     <option value="<?php echo $tec->getIdUsuario() ?>"><?php echo $tec->getNombre() ?></option>
+                                     <?php
+                                
+                                    $i++;
+                                }
+                            ?>
+                            
+                        </select>
+                        </div>
+                        </div>
+                        </div>
                     <br>
                     
                         <div class="form-group">

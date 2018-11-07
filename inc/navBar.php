@@ -27,6 +27,20 @@
                   </a>
                   <ul class="dropdown-menu">
                       <li><a href="#">Ver Perfil</a></li>
+                      <?php 
+                        if($_SESSION['idRol']==3){
+                          ?>
+                            <li><a href="dashboard.php">Mis Tickets</a></li>
+                          <?php
+                        }else{
+                          ?>
+                            <li><a href="vista-tickets.php">Mis Tickets</a></li>
+                          <?php
+                        }
+
+
+                      ?>
+                      
                       <li><a href="index.php">Cerrar sesión</a></li>
                       
                   </ul>    
