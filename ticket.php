@@ -126,14 +126,14 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
                   </span>
         
                   <div class="wrap-input800 validate-input" data-validate = "Escriba asunto">
-                    <input class="input800 " type="text" name="asunto" required minlength="7" maxlength="70" placeholder="Asunto">
+                    <input class="input800" type="text" name="asunto"  minlength="7" maxlength="70" placeholder="Asunto">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">              
                     </span>
                   </div>
         
                   <div class="wrap-input100 validate-input" data-validate = "Describa el problema">
-                    <textarea class="input-text-area" type="text" name="descripcion" required minlength="25" maxlength="600" placeholder="Descripción del problema"></textarea>
+                    <textarea class="input-text-area" type="text" name="descripcion"  minlength="25" maxlength="600" placeholder="Descripción del problema"></textarea>
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">                      
                     </span>
@@ -152,7 +152,7 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
 
                   <div class="  my-container-form-btn">
                       
-                    <button class="login100-form-btn " style="width: 200px; margin-right: 8px;" data-toggle="modal" data-target="#myModal">
+                    <button class="login100-form-btn " style="width: 200px; margin-right: 8px;">
                     <span class="glyphicon glyphicon-send"> </span>&nbspEnviar Ticket
                     </button>
                     <?php

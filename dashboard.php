@@ -8,11 +8,12 @@ if(!isset($_SESSION["usuario"])){
   require 'clases/manejadorTicket.php';
   require 'clases/manejadorDepartamento.php';
   require 'clases/manejadorUsuario.php';
-
+  require 'clases/manejadorTecnicosXTicket.php';
  
 //////////////////////////////////////////////////////////
     $md = new ManejadorDepartamento(); 
     $tk = new ManejadorTicket();
+    $mtxt = new ManejadorTecnicosXTicket();
 
 
 //Sirve para mostrar las distintas tablas
@@ -76,17 +77,27 @@ if(!isset($_SESSION['tabla'])){
         //Arreglo de pendientes
         $arrPen = array();
 
+        $sit = array();
+
         $contador = count($arrTicket);
         $contPendientes = 0;
         $contResueltos =0;
         $i = 0;
         while($i < count($arrTicket)){
-            if($arrTicket[$i]->getSolucion()==""){
-            $arrPen[] = $arrTicket[$i];
-            $contPendientes++;
-            }else{
+            $sit = $mtxt->obtenerTecxticket($arrTicket[$i]->getIdTicket());
+           
+            
+
+            if($arrTicket[$i]->getEstado()=="Solucionado"){
+            
             $arrRes[] = $arrTicket[$i];
             $contResueltos++;
+            }else if($sit->getIdTicket()==""){
+                $arrPen[] = $arrTicket[$i];
+                $contPendientes++;
+
+            }else{
+                $arrProc[] = $arrTicket[$i];
             }
             $i++;
         }
