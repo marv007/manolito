@@ -44,7 +44,7 @@
                 
                 <p class="pull-right text-primary"><br>
                   <strong>
-                  <?php include "./inc/timezone.php"; echo $_GET['id'];?>
+                  <?php include "./inc/timezone.php";?>
                  </strong>
                </p>
               </div>
