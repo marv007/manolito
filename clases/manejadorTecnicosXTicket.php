@@ -6,13 +6,10 @@ require_once 'class.usuario.php';
 
 class ManejadorTecnicosXTicket extends mysqli{
 
-    public function insertarTecnico(Ticket $t, Usuario $u){
+    public function insertarTecnico($idTicket, $idUsuario){
         try{
             
             $conn = conexion::getInstance();
-
-            $idUsuario = $u->getIdUsuario();            
-            $idTicket = $t->getIdTicket();
 
             $stmn = "INSERT INTO tecnicosxticket(ID_usuario, ID_ticket, created_date, created_by) VALUES('".$idUsuario."', '".$idTicket."', SYSDATE(), USER())";
                        

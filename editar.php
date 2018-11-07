@@ -8,10 +8,11 @@
   require 'clases/manejadorTicket.php';
   require 'clases/manejadorUsuario.php';
   require 'clases/manejadorDepartamento.php';
+  require 'clases/manejadorTecnicosXTicket.php';
  
   //Se usa el manejador ticket para ir a traer un tiquet especifico
-  $tk = new ManejadorTicket();
-  $ticket = $tk->obtenerTicket($_GET['id']);
+  $mt = new ManejadorTicket();
+  $ticket = $mt->obtenerTicket($_GET['id']);
   
   //se usa manejador usuario para ir a traer un usuario en especifico
   $us = new ManejadorUsuario();
@@ -70,12 +71,12 @@
           <div class="container">
             <div class="col-sm-12">
                 <form class="form-horizontal" role="form" action="" method="POST">
-                		<input type="hidden" name="id_edit" value="<?php echo $GET['id']?>">
+                		<input type="hidden" name="id_edit" value="<?php echo $_GET['id']?>">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Id Ticket</label>
                             <div class='col-sm-10'>
                                 <div class="input-group">
-                                    <input class="form-control" readonly="" type="text" name="fecha_ticket" readonly="" value="<?php echo $ticket->getIdTicket();?>">
+                                    <input class="form-control" readonly="" type="text" name="Id_ticket" readonly="" value="<?php echo $ticket->getIdTicket();?>">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
@@ -148,7 +149,8 @@
                             <div class='col-sm-10'>
                                 <div class="input-group">
                         <select class="form-control" name="tecnico">
-                            <option value="<?php echo $reg['estado_ticket']?>">Sin tecnico (Actual)</option>
+                       
+                            <option value="Sin Tecnico">Sin Tecnico (Actual)</option>
                             <?php
                                 
                                 $i = 0;
@@ -170,7 +172,7 @@
                             <label class="col-sm-2 control-label">Prioridad:</label>
                             <div class='col-sm-10'>
                                 <div class="input-group">
-                        <select class="form-control" name="tecnico">
+                        <select class="form-control" name="prioridad">
                             <?php 
                             $prioridad = $ticket->getPrioridad();
                             if($ticket->getPrioridad()==""){
@@ -221,3 +223,39 @@ $('#stac').stacktable();
 
     </body>
 </html>
+
+<?php 
+//Esto es para validar y actualizar tickets
+$idTicket = $_POST['id_edit'];
+$idTec = $_POST['tecnico'];
+$pri = $_POST['prioridad'];
+
+if($idTec == "Sin Tecnico" && $pri == "Sin Prioridad"){ ?>
+                               <!--  alert -->
+                               <div class="alert alert-danger" role="alert" style="position:absolute; top:60px; right:15px;">
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <span class= "glyphicon glyphicon-ok"></span><strong>¡Error!</strong><br>¡Tienes que asignar un tecnico y dar prioridad! 
+                                </div>
+                               <!--alert-->
+<?php }else{
+      $mt = new ManejadorTicket();
+      $mt->actualizarTicket($idTicket, $pri);
+      
+      $mtxt = new ManejadorTecnicosXTicket();
+      $mtxt->insertarTecnico($idTicket, $idTec);
+
+?>
+                               <!--  alert -->
+                               <div class="alert alert-success" role="alert" style="position:absolute; top:60px; right:15px;">
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <span class= "glyphicon glyphicon-ok"></span><strong>¡Con exito!</strong><br>¡El ticket se ha actualizado! 
+                                </div>
+                               <!--alert-->
+<?php
+header("Location: dashboard.php");
+ }?>
+
+
+   
+
+
