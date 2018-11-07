@@ -27,12 +27,13 @@ function bs_input_file() {
 $(function() {
 	bs_input_file();
 });
-
-$("table tbody tr").click(function() {
+//obtener seleccion de tabla
+/*$("table tbody tr").click(function() {
     var id = $(this).find("td:first-child").text();
+   
     
   });
-
+*/
 
 (function ($) {
     "use strict";

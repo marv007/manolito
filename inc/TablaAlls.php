@@ -4,13 +4,14 @@
                             <table class="table table-hover table-striped table-bordered">
                                 <thead style="background-color: #30914c; color: white">
                                     <tr>
-                                        <th class="text-center">Id</th>
-                                        <th class="text-center">Asunto</th>
-                                        <th class="text-center">Problema</th>
-                                        <th class="text-center">Estado</th>
-                                        <th class="text-center">Prioridad</th>
-                                        <th class="text-center">Departamento</th>
-                                        <th class="text-center">Tec. Encargado</th>
+                                        <th>Id</th>
+                                        <th>Asunto</th>
+                                        <th>Problema</th>
+                                        <th>Estado</th>
+                                        <th>Prioridad</th>
+                                        <th>Departamento</th>
+                                        <th>Tec. Encargado</th>
+                                        
                                         
                                     </tr>
                                 </thead>
@@ -31,6 +32,7 @@
                                         <td><?php echo $a->getPrioridad() ?></td>
                                         <td>Departamento</td>
                                         <td>Técnico</td>
+                                        
                                         
                                     </tr>
                                     

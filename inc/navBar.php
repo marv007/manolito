@@ -20,7 +20,7 @@
           </form>
 
           <ul class="nav navbar-nav navbar-right">
-            <li data-toggle="tooltip" data-placement="bottom" title="Aquí encontrarás tus Tickets"><a href="vista-tickets.php"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
+            <li data-toggle="tooltip" data-placement="bottom" title="Aquí encontrarás tus Tickets"><a href="dashboard.php"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
             <li data-toggle="tooltip" data-placement="bottom" title="Redacta y envía un nuevo ticket"><a href="ticket.php"><span class="glyphicon glyphicon-plus"></span>  Nuevo ticket</a></li>
             <li class="dropdown" data-toggle="tooltip" data-placement="bottom" title="Consultar datos del perfil o cerrar sesión"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <?php echo utf8_decode($_SESSION["usuario"]);?>
             <span class="caret"></span>

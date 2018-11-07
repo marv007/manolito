@@ -121,16 +121,10 @@ if(!isset($_SESSION["usuario"])){
             </div>
           
           </div>
-          
-          
-
-      
+   
     </div>
 
    
-  
-
-      
   <!--
       <footer class="footer">
         <p>&copy; Manolito 2018</p>

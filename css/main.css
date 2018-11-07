@@ -48,10 +48,10 @@
 body, html {
 	height: 100%;
   font-family: Poppins-Regular, sans-serif;
-  background: -webkit-linear-gradient(-135deg, #0bc7f7ec, #d4d6e4);
-  background: -o-linear-gradient(-135deg, #0bc7f7ec, #d4d6e4);
-  background: -moz-linear-gradient(-135deg, #0bc7f7ec, #d4d6e4);
-  background: linear-gradient(-135deg, #0bc7f7ec, #d4d6e4);
+  background: -webkit-linear-gradient(-135deg, #1d60f1ec, #b03df3);
+  background: -o-linear-gradient(-135deg, #1d60f1ec, #b03df3);
+  background: -moz-linear-gradient(-135deg, #1d60f1ec, #b03df3);
+  background: linear-gradient(-135deg, #1d60f1ec, #b03df3);
 }
 
 /*---------------------------------------------*/
@@ -184,11 +184,7 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #9053c7;
-  background: -webkit-linear-gradient(-135deg, #2edcf349, #4158d0);
-  background: -o-linear-gradient(-135deg, #2edcf349, #4158d0);
-  background: -moz-linear-gradient(-135deg, #2edcf349, #4158d0);
-  background: linear-gradient(-135deg, #2edcf349, #4158d0);
+  background: transparent;
 }
 
 .container-general {
