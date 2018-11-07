@@ -147,26 +147,12 @@ class ManejadorTicket extends mysqli{
     }
     //////////////////////////////////////////////////////
 
-    public function actualizarTicket(Ticket $t){
+    public function actualizarTicket($idTicket, $pri){
         try{
             
             $conn = conexion::getInstance();
+            $stmn = "UPDATE ticket SET prioridad='$pri' WHERE ID_ticket='$idTicket'";
 
-            
-
-            $idUsuario = $t->getIdUsuario();
-            $asunto = $t->getAsunto();
-            $problema = $t->getProblema();
-            $solucion = $t->getSolucion();
-            $fechaInicio = $t->getFechaInicio();
-            $fechaFinal = $t->getFechaFinal();
-            $estado = $t->getEstado();
-            $prioridad = $t->getPrioridad();
-            $idArchivo = $t->getIdArchivo();
-
-            
-
-            //$stmn = "INSERT INTO ticket(ID_usuario, asunto, problema, solucion, fechaInicio, estado, prioridad, ID_archivo) values('".$idUsuario."','".$asunto."', '".$problema."', '".$solucion."', '".$fechaInicio."', '".$estado."', '".$prioridad."', '".$idArchivo."')";
             $conn->execQuery($stmn);
             
 

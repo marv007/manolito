@@ -22,7 +22,7 @@ class ManejadorUsuario extends mysqli{
              $us->setCorreo($user['correo']);
              $us->setPassword($user['password']);
              $us->setRol($user['ID_rol']);
-             //se a;ade el objeto usuario a la coleccion de objetos ticket
+             
              
 
         }
@@ -42,7 +42,7 @@ public function obtenerTecnicos(){
         $conn = conexion::getInstance();
         $stmn = "SELECT * from usuario WHERE ID_rol = 2";
         $resultado = $conn->execQuery($stmn);
-        
+        $Usuario = array();
         while($user = $resultado->fetch_assoc()){
              //crea un objeto usuario
              $us = new Usuario();
@@ -53,12 +53,12 @@ public function obtenerTecnicos(){
              $us->setPassword($user['password']);
              $us->setRol($user['ID_rol']);
              //se a;ade el objeto usuario a la coleccion de objetos ticket
-             
+             array_push($Usuario, $us);
 
         }
         //se cierra la conexion
         $conn = null;
-        return $us;
+        return $Usuario;
         
     }catch(exeption $e){
         die("Error :". $e->getMessage());

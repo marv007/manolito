@@ -114,11 +114,11 @@ if(!isset($_SESSION['tabla'])){
           <div class="row">
             <div class="col-sm-12">
               <br>
-                <h3>Panel Administrativo <a class ="pull-right text-primary" style="color:white" href="vista-tickets.php">Ver mis tickets</a></h3>                
+                <h3>Panel Administrativo <a class ="pull-right text-primary" style="color:white; background-color: #30914c" href="vista-tickets.php">Ver mis tickets</a></h3>                
                 <p class="pull-right text-primary">
-                  <strong style="color:white">
-                  <?php include "inc/timezone.php"; ?>
-                 </strong>
+                   <strong style="color:white">
+                       <?php include "inc/timezone.php"; ?>
+                   </strong>
                </p>
             </div>
         </div>
