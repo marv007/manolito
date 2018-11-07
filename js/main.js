@@ -137,7 +137,7 @@ $(function() {
     function showValidate(input1) {
         var thisAlert = $(input1).parent();
         
-
+        $(thisAlert).addClass('alert-validate');
         
         
         Push.create("¡Error!", { //Titulo de la notificación
@@ -149,7 +149,7 @@ $(function() {
 				this.close(); //Cierra la notificación
 			}
         });
-        $(thisAlert).addClass('alert-validate');
+        
     }
 
     function hideValidate(input1) {
@@ -159,7 +159,7 @@ $(function() {
     }
 
     
-    
+   
     
     
 
