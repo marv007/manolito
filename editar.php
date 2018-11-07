@@ -24,6 +24,43 @@
 
  
  ?>
+<!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<?php 
+//Esto es para validar y actualizar tickets
+
+if(isset( $_POST['id_edit'])){
+    $idTicket = $_POST['id_edit'];
+    $idTec = $_POST['tecnico'];
+    $pri = $_POST['prioridad'];
+
+
+
+       if($idTec == "Sin Tecnico" && $pri == "Sin Prioridad"){ ?>
+                               <!--  alert -->
+                               <div class="alert alert-danger" role="alert" style="position:absolute; top:60px; right:15px;">
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <span class= "glyphicon glyphicon-ok"></span><strong>¡Error!</strong><br>¡Tienes que asignar un tecnico y dar prioridad! 
+                                </div>
+                               <!--alert-->
+      <?php }else{
+         $mt = new ManejadorTicket();
+         $mt->actualizarTicket($idTicket, $pri);
+      
+         $mtxt = new ManejadorTecnicosXTicket();
+         $mtxt->insertarTecnico($idTicket, $idTec);
+
+        ?>
+                               <!--  alert -->
+                               <div class="alert alert-success" role="alert" style="position:absolute; top:60px; right:15px;">
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <span class= "glyphicon glyphicon-ok"></span><strong>¡Con exito!</strong><br>¡El ticket se ha actualizado! 
+                                </div>
+                               <!--alert-->
+      <?php
+      header("Location: dashboard.php");
+      }
+   }?>
+
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -224,36 +261,6 @@ $('#stac').stacktable();
     </body>
 </html>
 
-<?php 
-//Esto es para validar y actualizar tickets
-$idTicket = $_POST['id_edit'];
-$idTec = $_POST['tecnico'];
-$pri = $_POST['prioridad'];
-
-if($idTec == "Sin Tecnico" && $pri == "Sin Prioridad"){ ?>
-                               <!--  alert -->
-                               <div class="alert alert-danger" role="alert" style="position:absolute; top:60px; right:15px;">
-                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                  <span class= "glyphicon glyphicon-ok"></span><strong>¡Error!</strong><br>¡Tienes que asignar un tecnico y dar prioridad! 
-                                </div>
-                               <!--alert-->
-<?php }else{
-      $mt = new ManejadorTicket();
-      $mt->actualizarTicket($idTicket, $pri);
-      
-      $mtxt = new ManejadorTecnicosXTicket();
-      $mtxt->insertarTecnico($idTicket, $idTec);
-
-?>
-                               <!--  alert -->
-                               <div class="alert alert-success" role="alert" style="position:absolute; top:60px; right:15px;">
-                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                  <span class= "glyphicon glyphicon-ok"></span><strong>¡Con exito!</strong><br>¡El ticket se ha actualizado! 
-                                </div>
-                               <!--alert-->
-<?php
-header("Location: dashboard.php");
- }?>
 
 
    
