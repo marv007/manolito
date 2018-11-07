@@ -8,12 +8,16 @@ if(!isset($_SESSION["usuario"])){
   require 'clases/manejadorTicket.php';
   require 'clases/manejadorDepartamento.php';
   require 'clases/manejadorUsuario.php';
+  require 'clases/manejadorTecnicosXTicket.php';
 
   $tk = new ManejadorTicket();
-  $md = new ManejadorDepartamento(); 
+  $md = new ManejadorDepartamento();
+  $mtxt = new manejadorTecnicosXTicket(); 
   $arrTicket = array(); 
 
   $arrTicket = $tk->obtenerTickett($_SESSION['idUsuario']);
+  
+  //Arreglo con todos los tickets
   
 
   //Arreglo de solucionados
@@ -21,18 +25,31 @@ if(!isset($_SESSION["usuario"])){
 
   //Arreglo de pendientes
   $arrPen = array();
+  $arrProc = array();
+
+  $sit = array();
 
   $contador = count($arrTicket);
   $contPendientes = 0;
   $contResueltos =0;
+  $contProc = 0;
   $i = 0;
   while($i < count($arrTicket)){
-      if($arrTicket[$i]->getSolucion()==""){
-      $arrPen[] = $arrTicket[$i];
-      $contPendientes++;
-      }else{
+      $sit = $mtxt->obtenerTecxticket($arrTicket[$i]->getIdTicket());
+     
+      
+
+      if($arrTicket[$i]->getEstado()=="Solucionado"){
+      
       $arrRes[] = $arrTicket[$i];
       $contResueltos++;
+      }else if($sit->getIdTicket()==""){
+          $arrPen[] = $arrTicket[$i];
+          $contPendientes++;
+
+      }else{
+          $arrProc[] = $arrTicket[$i];
+          $contProc++;
       }
       $i++;
   }
@@ -92,8 +109,8 @@ if(!isset($_SESSION["usuario"])){
             <div class="row">
                 <div class="col-md-12">
                     <ul class="nav nav-tabs nav-justified" >
-                    <li class="active"><a href="#ticketsp" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Tickets pendientes&nbsp;&nbsp; <span class="badge" style="background-color:#f55210">0</span></a></li>
-                        <li><a href="#ticketsproc" data-toggle="tab"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Tickets en proceso&nbsp;&nbsp;<span class="badge" style="background-color: #f7822c"><?php echo $contPendientes?></span></a></li>
+                    <li class="active"><a href="#ticketsp" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Tickets pendientes&nbsp;&nbsp; <span class="badge" style="background-color:#f55210"><?php echo $contPendientes?></span></a></li>
+                        <li><a href="#ticketsproc" data-toggle="tab"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Tickets en proceso&nbsp;&nbsp;<span class="badge" style="background-color: #f7822c"><?php echo $contProc?></span></a></li>
                         <li><a href="#ticketsre" data-toggle="tab"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Tickets resueltos&nbsp;&nbsp; <?php $_SESSION['tabla']=="resuelto"?><span class="badge" style="background-color:  #6ada13"><?php echo $contResueltos?></span></a></li>
                         <li><a href="#ticketsall" data-toggle="tab"><i class="fa fa-list" ></i>&nbsp;&nbsp;Todos los tickets&nbsp;&nbsp; <?php $_SESSION['tabla']=="todos"?><span class="badge" style="background-color:#3498db"><?php echo $contador?></span></a></li>                        
                          
@@ -123,7 +140,7 @@ if(!isset($_SESSION["usuario"])){
 
                             <?php
                 
-                                include "inc/TablaAlls.php";
+                                include "inc/TablaAllsU.php";
                 
                             ?>
                         </div>
@@ -136,25 +153,26 @@ if(!isset($_SESSION["usuario"])){
 
                             <?php
                 
-                             //include "inc/TablaPen.php";
+                             include "inc/TablaProcU.php";
                 
                             ?>
                         </div>
                     </div>
                 </div>
-                
+                <!-- 
                 <div class="tab-pane" id="ticketsre">  
                     <div class="row">
                         <div class="col-md-12">
 
                             <?php
                 
-                                include "inc/TablaRes.php";
+                               // include "inc/TablaResU.php";
                 
                             ?>
                         </div>
                     </div>
                 </div>
+                -->
                 
                 
                 

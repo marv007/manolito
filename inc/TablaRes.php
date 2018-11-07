@@ -10,7 +10,7 @@
                                         <th>Asunto</th>
                                         <th>Problema</th>
                                         <th>Estado</th>
-                                        <th>Prioridad</th>
+                                        <th>Fecha resuelto</th>
                                         <th>Departamento</th>
                                         <th>Tec. Encargado</th>
                                         
@@ -21,6 +21,12 @@
                                      $i = 0;
                                      while($i < count($arrRes)){
                                           $a = $arrRes[$i];
+                                          $md = new ManejadorDepartamento();                                                                                  
+                                          $idUs = $a->getIdUsuario();
+                                          $mu = new ManejadorUsuario();
+                                          $usu = array();               
+                                          $usu = $mu->obtenerUsuario($a->getIdUsuario());                                        
+                                          $dep = $md->obtenerDepartamento($usu->getIdDepartamento());
                                ?>
 
                                 <tbody>
@@ -30,8 +36,8 @@
                                         <td class="text-center"><?php echo $a->getAsunto() ?></td>
                                         <td class="text-center"><?php echo $a->getProblema() ?></td>
                                         <td class="text-center"><?php echo $a->getEstado() ?></td>
-                                        <td class="text-center"><?php echo $a->getPrioridad() ?></td>
-                                        <td class="text-center">Departamento</td>
+                                        <td class="text-center"><?php echo $a->getFechaFinal() ?></td>
+                                        <td class="text-center"><?php echo utf8_encode($dep->getNombre())?></td>
                                         <td class="text-center">Técnico</td>
                                        
                                     </tr>

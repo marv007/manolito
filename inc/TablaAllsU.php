@@ -42,7 +42,7 @@
                                      }
                                 ?>
                             </table>
-                            <ul class="pagination pagination-lg pager" id="myPager"></ul>
+                            
                                 
                            
                         

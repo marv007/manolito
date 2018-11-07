@@ -54,7 +54,7 @@ if(!isset($_SESSION['tabla'])){
 
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        
         
 
 
@@ -82,6 +82,7 @@ if(!isset($_SESSION['tabla'])){
         $contador = count($arrTicket);
         $contPendientes = 0;
         $contResueltos =0;
+        $contProc = 0;
         $i = 0;
         while($i < count($arrTicket)){
             $sit = $mtxt->obtenerTecxticket($arrTicket[$i]->getIdTicket());
@@ -98,6 +99,7 @@ if(!isset($_SESSION['tabla'])){
 
             }else{
                 $arrProc[] = $arrTicket[$i];
+                $contProc++;
             }
             $i++;
         }
@@ -128,7 +130,7 @@ if(!isset($_SESSION['tabla'])){
                 <div class="col-md-12">
                     <ul class="nav nav-tabs nav-justified" >
                     <li class="active"><a href="#ticketsp" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Tickets pendientes&nbsp;&nbsp; <span class="badge" style="background-color:#f55210"><?php echo $contPendientes?></span></a></li>
-                        <li><a href="#ticketsproc" data-toggle="tab"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Tickets en proceso&nbsp;&nbsp;<span class="badge" style="background-color: #f7822c">0</span></a></li>
+                        <li><a href="#ticketsproc" data-toggle="tab"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Tickets en proceso&nbsp;&nbsp;<span class="badge" style="background-color: #f7822c"><?php echo $contProc?></span></a></li>
                         <li><a href="#ticketsre" data-toggle="tab"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Tickets resueltos&nbsp;&nbsp; <?php $_SESSION['tabla']=="resuelto"?><span class="badge" style="background-color:  #6ada13"><?php echo $contResueltos?></span></a></li>
                         <li><a href="#ticketsall" data-toggle="tab"><i class="fa fa-list" ></i>&nbsp;&nbsp;Todos los tickets&nbsp;&nbsp; <?php $_SESSION['tabla']=="todos"?><span class="badge" style="background-color:#3498db"><?php echo $contador?></span></a></li>                        
                          
@@ -171,7 +173,7 @@ if(!isset($_SESSION['tabla'])){
 
                             <?php
                 
-                             //include "inc/TablaPen.php";
+                             include "inc/TablaProc.php";
                 
                             ?>
                         </div>
