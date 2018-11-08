@@ -12,7 +12,8 @@ if(!isset($_SESSION["usuario"])){
 
   $tk = new ManejadorTicket();
   $md = new ManejadorDepartamento();
-  $mtxt = new manejadorTecnicosXTicket(); 
+  $mtxt = new manejadorTecnicosXTicket();
+
   $arrTicket = array(); 
 
   $arrTicket = $tk->obtenerTickett($_SESSION['idUsuario']);
@@ -112,7 +113,7 @@ if(!isset($_SESSION["usuario"])){
                     <li class="active"><a href="#ticketsp" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Tickets pendientes&nbsp;&nbsp; <span class="badge" style="background-color:#f55210"><?php echo $contPendientes?></span></a></li>
                         <li><a href="#ticketsproc" data-toggle="tab"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Tickets en proceso&nbsp;&nbsp;<span class="badge" style="background-color: #f7822c"><?php echo $contProc?></span></a></li>
                         <li><a href="#ticketsre" data-toggle="tab"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Tickets resueltos&nbsp;&nbsp; <?php $_SESSION['tabla']=="resuelto"?><span class="badge" style="background-color:  #6ada13"><?php echo $contResueltos?></span></a></li>
-                        <li><a href="#ticketsall" data-toggle="tab"><i class="fa fa-list" ></i>&nbsp;&nbsp;Todos los tickets&nbsp;&nbsp; <?php $_SESSION['tabla']=="todos"?><span class="badge" style="background-color:#3498db"><?php echo $contador?></span></a></li>                        
+                        <li><a href="#ticketsall" data-toggle="tab"><i class="fa fa-list" ></i>&nbsp;&nbsp;Todos mis tickets&nbsp;&nbsp; <?php $_SESSION['tabla']=="todos"?><span class="badge" style="background-color:#3498db"><?php echo $contador?></span></a></li>                        
                          
                     </ul>
                 </div>
@@ -159,20 +160,20 @@ if(!isset($_SESSION["usuario"])){
                         </div>
                     </div>
                 </div>
-                <!-- 
+                
                 <div class="tab-pane" id="ticketsre">  
                     <div class="row">
                         <div class="col-md-12">
 
                             <?php
                 
-                               // include "inc/TablaResU.php";
+                                include "inc/TablaResU.php";
                 
                             ?>
                         </div>
                     </div>
                 </div>
-                -->
+                
                 
                 
                 

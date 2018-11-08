@@ -18,14 +18,15 @@
                                 </thead>
 
                                 <?php
+                                    $a = array();
                                      $i = 0;
                                      while($i < count($arrRes)){
                                           $a = $arrRes[$i];
                                           $md = new ManejadorDepartamento();                                                                                  
                                           $idUs = $a->getIdUsuario();
                                           $mu = new ManejadorUsuario();
-                                          $usu = array();               
-                                          $usu = $mu->obtenerUsuario($a->getIdUsuario());                                        
+                                                        
+                                          $usu = $mu->obtenerUsuario($_SESSION['idUsuario']);                                        
                                           $dep = $md->obtenerDepartamento($usu->getIdDepartamento());
                                ?>
 

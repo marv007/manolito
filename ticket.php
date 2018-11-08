@@ -59,7 +59,7 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -126,14 +126,14 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
                   </span>
         
                   <div class="wrap-input800 validate-input" data-validate = "Escriba asunto">
-                    <input class="input800" type="text" name="asunto"  minlength="7" maxlength="70" placeholder="Asunto">
+                    <input class="input800" type="text" name="asunto" required minlength="7" maxlength="70" placeholder="Asunto">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">              
                     </span>
                   </div>
         
                   <div class="wrap-input100 validate-input" data-validate = "Describa el problema">
-                    <textarea class="input-text-area" type="text" name="descripcion"  minlength="25" maxlength="600" placeholder="Descripción del problema"></textarea>
+                    <textarea class="input-text-area" type="text" name="descripcion" required  minlength="25" maxlength="600" placeholder="Descripción del problema"></textarea>
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">                      
                     </span>

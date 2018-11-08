@@ -87,8 +87,6 @@ if(!isset($_SESSION['tabla'])){
         while($i < count($arrTicket)){
             $sit = $mtxt->obtenerTecxticket($arrTicket[$i]->getIdTicket());
            
-            
-
             if($arrTicket[$i]->getEstado()=="Solucionado"){
             
             $arrRes[] = $arrTicket[$i];
@@ -114,11 +112,11 @@ if(!isset($_SESSION['tabla'])){
           <div class="row">
             <div class="col-sm-12">
               <br>
-                <h3>Panel Administrativo <a class ="pull-right text-primary" style="color:white; background-color: #30914c" href="vista-tickets.php">Ver mis tickets</a></h3>                
+                <h3>Panel Administrativo <a class ="pull-right text-primary" style="color:white" href="vista-tickets.php">Ver mis tickets</a></h3>                
                 <p class="pull-right text-primary">
-                   <strong style="color:white">
-                       <?php include "inc/timezone.php"; ?>
-                   </strong>
+                  <strong style="color:white">
+                  <?php include "inc/timezone.php"; ?>
+                 </strong>
                </p>
             </div>
         </div>
@@ -266,16 +264,24 @@ if(!isset($_SESSION['tabla'])){
          $contPendientes = 0;
          $contResueltos =0;
          $i = 0;
+         $contProc = 0;
          while($i < count($arrTicket)){
-             if($arrTicket[$i]->getSolucion()==""){
-             $arrPen[] = $arrTicket[$i];
-             $contPendientes++;
-             }else{
-             $arrRes[] = $arrTicket[$i];
-             $contResueltos++;
-             }
-             $i++;
-         }
+            $sit = $mtxt->obtenerTecxticket($arrTicket[$i]->getIdTicket());
+           
+            if($arrTicket[$i]->getEstado()=="Solucionado"){
+            
+            $arrRes[] = $arrTicket[$i];
+            $contResueltos++;
+            }else if($sit->getIdTicket()==""){
+                $arrPen[] = $arrTicket[$i];
+                $contPendientes++;
+
+            }else{
+                $arrProc[] = $arrTicket[$i];
+                $contProc++;
+            }
+            $i++;
+        }
      ?>
         <div class="container" style="color: white">
           <div class="row">
@@ -367,17 +373,27 @@ if(!isset($_SESSION['tabla'])){
         //Arreglo de pendientes
         $arrPen = array();
 
+        $arrProc = array();
+
         $contador = count($arrTicket);
         $contPendientes = 0;
         $contResueltos =0;
+        $contProc = 0;
         $i = 0;
         while($i < count($arrTicket)){
-            if($arrTicket[$i]->getSolucion()==""){
-            $arrPen[] = $arrTicket[$i];
-            $contPendientes++;
-            }else{
+            $sit = $mtxt->obtenerTecxticket($arrTicket[$i]->getIdTicket());
+           
+            if($arrTicket[$i]->getEstado()=="Solucionado"){
+            
             $arrRes[] = $arrTicket[$i];
             $contResueltos++;
+            }else if($sit->getIdTicket()==""){
+                $arrPen[] = $arrTicket[$i];
+                $contPendientes++;
+
+            }else{
+                $arrProc[] = $arrTicket[$i];
+                $contProc++;
             }
             $i++;
         }
@@ -408,7 +424,7 @@ if(!isset($_SESSION['tabla'])){
                         <li class="active"><a href="#ticketsp" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Tickets pendientes&nbsp;&nbsp; <span class="badge" style="background-color:#f55210"><?php echo $contPendientes?></span></a></li>
                         <li><a href="#ticketsproc" data-toggle="tab"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Tickets en proceso&nbsp;&nbsp;<span class="badge" style="background-color: #f7822c">0</span></a></li>
                         <li><a href="#ticketsre" data-toggle="tab"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Tickets resueltos&nbsp;&nbsp; <?php $_SESSION['tabla']=="resuelto"?><span class="badge" style="background-color:  #6ada13"><?php echo $contResueltos?></span></a></li>
-                        <li><a href="#ticketsall" data-toggle="tab"><i class="fa fa-list" ></i>&nbsp;&nbsp;Todos los tickets&nbsp;&nbsp; <?php $_SESSION['tabla']=="todos"?><span class="badge" style="background-color:#3498db"><?php echo $contador?></span></a></li>                        
+                        <li><a href="#ticketsall" data-toggle="tab"><i class="fa fa-list" ></i>&nbsp;&nbsp;Todos mis tickets&nbsp;&nbsp; <?php $_SESSION['tabla']=="todos"?><span class="badge" style="background-color:#3498db"><?php echo $contador?></span></a></li>                        
                         
                         
                     </ul>
@@ -436,7 +452,7 @@ if(!isset($_SESSION['tabla'])){
 
                             <?php
                 
-                                include "inc/TablaAlls.php";
+                                include "inc/TablaAllsU.php";
                 
                             ?>
                         </div>
@@ -449,13 +465,25 @@ if(!isset($_SESSION['tabla'])){
 
                             <?php
                 
-                                include "inc/TablaRes.php";
+                                include "inc/TablaResU.php";
                 
                             ?>
                         </div>
                     </div>
                 </div>
                 
+                <div class="tab-pane" id="ticketsproc">  
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <?php
+                
+                             include "inc/TablaProcU.php";
+                
+                            ?>
+                        </div>
+                    </div>
+                </div>
                 
                 
                 

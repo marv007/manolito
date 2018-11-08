@@ -19,7 +19,13 @@
                                 <?php
                                      $i = 0;
                                      while($i < count($arrTicket)){
-                                          $a = $arrTicket[$i];
+                                          $a = $arrTicket[$i];                                          
+                                          $md = new ManejadorDepartamento();                                                                                  
+                                          $idUs = $a->getIdUsuario();
+                                          $mu = new ManejadorUsuario();
+                                          $usu = array();               
+                                          $usu = $mu->obtenerUsuario($a->getIdUsuario());                                        
+                                          $dep = $md->obtenerDepartamento($usu->getIdDepartamento());
                                ?>
 
                                 <tbody id="myTable">
@@ -30,7 +36,7 @@
                                         <td style="max-width: 45vh; overflow: hidden;"><?php echo $a->getProblema() ?></td>
                                         <td><?php echo $a->getEstado() ?></td>
                                         <td><?php echo $a->getPrioridad() ?></td>
-                                        <td>Departamento</td>
+                                        <td><?php echo utf8_encode($dep->getNombre())?></td>
                                         <td>Técnico</td>
                                         
                                         

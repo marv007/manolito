@@ -20,6 +20,7 @@
                                 
                                 
                                      $i = 0;
+                                     if($i>0){
                                      while($i < count($arrProc)){
                                           $a = $arrProc[$i];
                                           $md = new ManejadorDepartamento();                                                                                  
@@ -54,6 +55,7 @@
                                 <?php
                                       $i++;
                                      }
+                                    }
                                 ?>
                             </table>
                            
