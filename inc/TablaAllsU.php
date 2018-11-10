@@ -27,10 +27,10 @@
                                     <tr>
                                         <td><?php echo $a->getIdTicket() ?></td>
                                         <td><?php echo $a->getAsunto() ?></td>
-                                        <td style="max-width: 45vh; overflow: hidden;"><?php echo $a->getProblema() ?></td>
+                                        <td style="max-width: 45vh; display: table-cell; float: none; "><?php echo $a->getProblema() ?></td>
                                         <td><?php echo $a->getEstado() ?></td>
                                         <td><?php echo $a->getPrioridad() ?></td>
-                                        <td>Departamento</td>
+                                        <td><?php echo utf8_encode($dep->getNombre())?></td>
                                         <td>Técnico</td>
                                         
                                         

@@ -11,7 +11,7 @@
                                         <th>Prioridad</th>
                                         <th>Departamento</th>
                                         <th>Fecha creado</th>
-                                        <th>Editar</th>
+                                        
                                         
                                     </tr>
                                 </thead>
@@ -20,14 +20,14 @@
                                 
                                 
                                      $i = 0;
-                                     if($i>0){
+                                     if(count($arrProc)>0){
                                      while($i < count($arrProc)){
                                           $a = $arrProc[$i];
                                           $md = new ManejadorDepartamento();                                                                                  
                                           $idUs = $a->getIdUsuario();
                                           $mu = new ManejadorUsuario();
                                           $usu = array();               
-                                          $usu = $mu->obtenerUsuario($a->getIdUsuario());                                        
+                                          $usu = $mu->obtenerUsuario($_SESSION['idUsuario']);                                        
                                           $dep = $md->obtenerDepartamento($usu->getIdDepartamento());
                                             
                                           
@@ -45,9 +45,7 @@
                                         <td><?php echo $a->getPrioridad() ?></td>
                                         <td><?php echo utf8_encode($dep->getNombre())?></td>
                                         <td><?php echo $a->getfechaInicio() ?></td>
-                                        <td class="text-center">
-                                            <a href="editar.php?id=<?php echo $a->getIdTicket()?>" class="btn btn-sm btn-warning" style="font-size: 16px"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        </td>
+                                        
                                         
                                     </tr>
                                     

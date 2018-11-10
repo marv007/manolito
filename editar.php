@@ -19,10 +19,22 @@
   $usuario = $us->obtenerUsuario($ticket->getIdUsuario());
   $md = new ManejadorDepartamento();
   $dep = $md->obtenerDepartamento($usuario->getIdDepartamento());
+  //Arreglo de usuarios tecnicos
   $tec = $us->obtenerTecnicos();
-
-
- 
+  
+  //Traer tecnico del respectivo ticket 
+  $tXt = new ManejadorTecnicosXTicket();
+  $tecnObject = $tXt->obtenerTecxticket($_GET['id']); 
+  $tecnId = $tecnObject->getIdUsuario();
+  
+     if($tecnId == ""){
+         $tecnico = new Usuario();
+         $tecnico->setNombre("");
+     }else{
+        $usuarioTec = new ManejadorUsuario();
+        $tecnico = $usuarioTec->obtenerUsuario($tecnId);
+     }
+  
  ?>
 <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <?php 
@@ -35,7 +47,7 @@ if(isset( $_POST['id_edit'])){
 
 
 
-       if($idTec == "Sin Tecnico" && $pri == "Sin Prioridad"){ ?>
+       if($idTec == "Sin Tecnico" || $pri == "Sin Prioridad"){ ?>
                                <!--  alert -->
                                <div class="alert alert-danger" role="alert" style="position:absolute; top:60px; right:15px;">
                                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -118,7 +130,8 @@ if(isset( $_POST['id_edit'])){
                                 </div>
                             </div>
                         </div>
-                    
+                        
+                         <!--Estado-->
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Estado</label>
                             <div class='col-sm-10'>
@@ -134,6 +147,7 @@ if(isset( $_POST['id_edit'])){
                             </div>
                         </div>
 
+                        <!--Nombre-->
                         <div class="form-group">
                           <label  class="col-sm-2 control-label">Nombre</label>
                           <div class="col-sm-10">
@@ -143,7 +157,8 @@ if(isset( $_POST['id_edit'])){
                               </div>
                           </div>
                         </div>
-
+                         
+                         <!--Email-->
                         <div class="form-group">
                           <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
                           <div class="col-sm-10">
@@ -153,7 +168,8 @@ if(isset( $_POST['id_edit'])){
                               </div> 
                           </div>
                         </div>
-
+                         
+                         <!--Departamento-->
                         <div class="form-group">
                           <label  class="col-sm-2 control-label">Departamento</label>
                           <div class="col-sm-10">
@@ -163,7 +179,8 @@ if(isset( $_POST['id_edit'])){
                               </div> 
                           </div>
                         </div>
-
+                        
+                        <!--Asunto-->
                         <div class="form-group">
                           <label  class="col-sm-2 control-label">Asunto</label>
                           <div class="col-sm-10">
@@ -173,7 +190,8 @@ if(isset( $_POST['id_edit'])){
                               </div> 
                           </div>
                         </div>
-
+                        
+                        <!--Mensaje-->
                         <div class="form-group">
                           <label  class="col-sm-2 control-label">Mensaje</label>
                           <div class="col-sm-10">
@@ -181,15 +199,22 @@ if(isset( $_POST['id_edit'])){
                           </div>
                         </div>
                         
+                        <!--Tecnico-->
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Técnico:</label>
                             <div class='col-sm-10'>
                                 <div class="input-group">
                         <select class="form-control" name="tecnico">
-                       
-                            <option value="Sin Tecnico">Sin Tecnico (Actual)</option>
+                             <!--Validacion si hay tecnico asignado, sino establecer SIN TECNICO-->
+                        <?php 
+                            
+                            if($tecnico->getNombre()==""){
+                                $tecnico->setNombre("Sin Tecnico");  
+                             }?>
+                            <option value="<?php echo $tecnico->getNombre()?>"><?php echo $tecnico->getNombre() ?> (Actual)</option>>
+                            <!--Cargando todos los tecnicos-->
                             <?php
-                                
+                            
                                 $i = 0;
                                 while($i < count($tec)){
                                      ?>
@@ -198,18 +223,21 @@ if(isset( $_POST['id_edit'])){
                                 
                                     $i++;
                                 }
+                            
                             ?>
                             
                         </select>
                         </div>
                         </div>
                         </div>
-
+                         
+                         <!--Prioridad-->
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Prioridad:</label>
                             <div class='col-sm-10'>
                                 <div class="input-group">
                         <select class="form-control" name="prioridad">
+                            <!--Validacion si hay prioridad asignada, sino establecer SIN PRIORIDAD-->
                             <?php 
                             $prioridad = $ticket->getPrioridad();
                             if($ticket->getPrioridad()==""){

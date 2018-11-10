@@ -100,6 +100,8 @@ class Ticket{
   public function setIdArchivo($idArchivo){
       $this->idArchivo = $idArchivo;
   }
+
+
 }
 
 ?>

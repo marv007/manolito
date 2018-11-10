@@ -62,6 +62,7 @@ class ManejadorTicket extends mysqli{
                  $tk->setFechaFinal($ticket['fechaFinal']);
                  $tk->setEstado($ticket['estado']);
                  $tk->setPrioridad($ticket['prioridad']);
+                 
                  //se a;ade el objeto ticket a la coleccion de objetos ticket
                  array_push($Ticket, $tk);
 

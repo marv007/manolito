@@ -36,7 +36,7 @@ class ManejadorTecnicosXTicket extends mysqli{
                  $tk->setIdTicket($ticket['ID_ticket']);
                  $tk->setIdUsuario($ticket['ID_usuario']);
                  
-                 //se a;ade el objeto ticket a la coleccion de objetos ticket
+                 //
                  
 
             }

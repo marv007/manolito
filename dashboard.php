@@ -63,7 +63,7 @@ if(!isset($_SESSION['tabla'])){
         <!--NAVBAR-->
     <?php include "inc/navBar.php"; ?>
       
-    <!--Si es administrador-->
+    <!--//////////////////////////////////////Si es administrador//////////////////////////////////////////////-->
      <?php if($_SESSION['idRol']==1){
         
         $arrTicket = array(); 
@@ -76,7 +76,8 @@ if(!isset($_SESSION['tabla'])){
 
         //Arreglo de pendientes
         $arrPen = array();
-
+        
+        //Arreglo que contendra usuarios que son tecnicos
         $sit = array();
 
         $contador = count($arrTicket);
@@ -239,25 +240,21 @@ if(!isset($_SESSION['tabla'])){
                 </div>
             </div>
         </div>
-        
-          
-    
-
-
-
         </div><!--container principal-->
+
+        <!--//////////////////////////////////////Si es tecnico//////////////////////////////////////////////-->
      <?php }else if($_SESSION['idRol']==2){
          
          $arrTicket = array(); 
  
-         //Arreglo con todos los tickets
+         //Arreglo con todos los tickets de un usuario
          $arrTicket = $tk->obtenerTickett($_SESSION['idUsuario']);
          
  
-         //Arreglo de solucionados
+         //Arreglo de solucionados de un usuario
          $arrRes = array();
  
-         //Arreglo de pendientes
+         //Arreglo de pendientes de un usuario
          $arrPen = array();
  
          $contador = count($arrTicket);
@@ -270,8 +267,8 @@ if(!isset($_SESSION['tabla'])){
            
             if($arrTicket[$i]->getEstado()=="Solucionado"){
             
-            $arrRes[] = $arrTicket[$i];
-            $contResueltos++;
+                $arrRes[] = $arrTicket[$i];
+                $contResueltos++;
             }else if($sit->getIdTicket()==""){
                 $arrPen[] = $arrTicket[$i];
                 $contPendientes++;
@@ -304,10 +301,9 @@ if(!isset($_SESSION['tabla'])){
             <div class="row">
                 <div class="col-md-12">
                     <ul class="nav nav-tabs nav-justified" >
-                        <li class="active"><a href="#ticketsp" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Tickets pendientes&nbsp;&nbsp; <span class="badge" style="background-color:#f55210"><?php echo $contPendientes?></span></a></li>
-                        <li><a href="#ticketsproc" data-toggle="tab"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Tickets en proceso&nbsp;&nbsp;<span class="badge" style="background-color: #f7822c">0</span></a></li>
+                        <li class="active"><a href="#ticketsp" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Buzon de Entrada&nbsp;&nbsp; <span class="badge" style="background-color:#f55210"><?php echo $contPendientes?></span></a></li>
                         <li><a href="#ticketsre" data-toggle="tab"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Tickets resueltos&nbsp;&nbsp; <?php $_SESSION['tabla']=="resuelto"?><span class="badge" style="background-color:  #6ada13"><?php echo $contResueltos?></span></a></li>
-                        <li><a href="#ticketsall" data-toggle="tab"><i class="fa fa-list" ></i>&nbsp;&nbsp;Todos los tickets&nbsp;&nbsp; <?php $_SESSION['tabla']=="todos"?><span class="badge" style="background-color:#3498db"><?php echo $contador?></span></a></li>                        
+                                                
                         
                         
                     </ul>
@@ -354,11 +350,9 @@ if(!isset($_SESSION['tabla'])){
                         </div>
                     </div>
                 </div>
-                
-                
-                
-                
             </div>
+
+            <!--//////////////////////////////////////Si es operario//////////////////////////////////////////////-->
      <?php } else {
         
         $arrTicket = array(); 
@@ -422,7 +416,7 @@ if(!isset($_SESSION['tabla'])){
                 <div class="col-md-12">
                     <ul class="nav nav-tabs nav-justified" >
                         <li class="active"><a href="#ticketsp" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Tickets pendientes&nbsp;&nbsp; <span class="badge" style="background-color:#f55210"><?php echo $contPendientes?></span></a></li>
-                        <li><a href="#ticketsproc" data-toggle="tab"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Tickets en proceso&nbsp;&nbsp;<span class="badge" style="background-color: #f7822c">0</span></a></li>
+                        <li><a href="#ticketsproc" data-toggle="tab"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Tickets en proceso&nbsp;&nbsp;<span class="badge" style="background-color: #f7822c"><?php echo $contProc;?></span></a></li>
                         <li><a href="#ticketsre" data-toggle="tab"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Tickets resueltos&nbsp;&nbsp; <?php $_SESSION['tabla']=="resuelto"?><span class="badge" style="background-color:  #6ada13"><?php echo $contResueltos?></span></a></li>
                         <li><a href="#ticketsall" data-toggle="tab"><i class="fa fa-list" ></i>&nbsp;&nbsp;Todos mis tickets&nbsp;&nbsp; <?php $_SESSION['tabla']=="todos"?><span class="badge" style="background-color:#3498db"><?php echo $contador?></span></a></li>                        
                         
