@@ -148,6 +148,8 @@ class ManejadorTicket extends mysqli{
     }
     //////////////////////////////////////////////////////
 
+    
+
     public function actualizarTicket($idTicket, $pri){
         try{
             
@@ -165,28 +167,18 @@ class ManejadorTicket extends mysqli{
     public function eliminarTicket(Ticket $t){
         try{
             
-            $conn = conexion::getInstance();
+            $conn = conexion::getInstance();          
 
             
-
-            $idUsuario = $t->getIdUsuario();
-            $asunto = $t->getAsunto();
-            $problema = $t->getProblema();
-            $solucion = $t->getSolucion();
-            $fechaInicio = $t->getFechaInicio();
-            $fechaFinal = $t->getFechaFinal();
-            $estado = $t->getEstado();
-            $prioridad = $t->getPrioridad();
             $idArchivo = $t->getIdArchivo();
             $idTicket = $t->getIdTicket();
 
-            
             //Soft DELETE ticket
-            $stmn = "UPDATE ticket SET status = 'deleted' WHERE ID_ticket ='".$idTicket."')";
+            $stmn = "UPDATE ticket SET status = 'deleted' WHERE ID_ticket ='".$idTicket."'";
             $conn->execQuery($stmn);
 
             //Soft DELETE archivo 
-            $stmn = "UPDATE archivo SET status = 'deleted' WHERE ID_archivo ='".$idArchivo."')";
+            $stmn = "UPDATE archivo SET status = 'deleted' WHERE ID_archivo ='".$idArchivo."'";
             $conn->execQuery($stmn);
             
 

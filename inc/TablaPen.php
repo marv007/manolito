@@ -45,12 +45,15 @@
                                         <td><?php echo utf8_encode($dep->getNombre())?></td>
                                         <td><?php echo $a->getfechaInicio() ?></td>
                                         <td class="text-center">
-                                            <a href="editar.php?id=<?php echo $a->getIdTicket()?>" class="btn btn-sm btn-warning" style="font-size: 16px"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                            <a href="editar.php?id=<?php echo $a->getIdTicket()?>" class="btn btn-sm btn-warning" style="font-size: 14px"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                            <a href="borrar.php?id=<?php echo $a->getIdTicket()?>" class="btn btn-sm btn-danger" style="font-size: 14px"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                         </td>
                                         
                                     </tr>
                                     
                                 </tbody>
+
+                                
                                 <?php
                                       $i++;
                                      }

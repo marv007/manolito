@@ -81,7 +81,11 @@ if(isset( $_POST['id_edit'])){
     <head>
     <title>Administrar Tickets</title>
         <?php include "./inc/links.php"; ?> 
+        <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
 
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 
     </head>
     <body>
@@ -91,11 +95,11 @@ if(isset( $_POST['id_edit'])){
     <!--Si es administrador-->
      <?php if($_SESSION['idRol']==1){ ?>
     <br><br>
-      <div class="container">
+      <div class="container" style="background-color: white">
           <div class="row">
             <div class="col-sm-12">
               <div class="page-header">
-                <h2 class="animated lightSpeedIn">Información del Ticket</h2>
+                <h3 class="animated lightSpeedIn">Información del Ticket</h3>
                 
                 <p class="pull-right text-primary"><br>
                   <strong>
@@ -108,25 +112,25 @@ if(isset( $_POST['id_edit'])){
         </div>
 
              <!--************************************ Page content******************************-->
-  <div class="container">
+  <div class="container" style="background-color: white">
           <div class="row">
             <div class="col-sm-12">
                 <a href="dashboard.php" class="btn btn-primary btn-sm pull-right"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver administrar Tickets</a>
             </div>
           </div>
    </div>
-    <br>        
             
-          <div class="container">
+            
+          <div class="container" style="background-color: white">
             <div class="col-sm-12">
                 <form class="form-horizontal" role="form" action="" method="POST">
                 		<input type="hidden" name="id_edit" value="<?php echo $_GET['id']?>">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Id Ticket</label>
-                            <div class='col-sm-10'>
+                            <div class='col-sm-3'>
                                 <div class="input-group">
                                     <input class="form-control" readonly="" type="text" name="Id_ticket" readonly="" value="<?php echo $ticket->getIdTicket();?>">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -134,7 +138,7 @@ if(isset( $_POST['id_edit'])){
                          <!--Estado-->
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Estado</label>
-                            <div class='col-sm-10'>
+                            <div class='col-sm-3'>
                                 <div class="input-group">
                                     <select class="form-control" name="estado_ticket">
                                         <option value="<?php echo $reg['estado_ticket']?>"><?php echo $ticket->getEstado();?> (Actual)</option>
@@ -142,7 +146,7 @@ if(isset( $_POST['id_edit'])){
                                         <option value="En proceso">Pausa</option>
                                         <option value="Resuelto">Solucionado</option>
                                       </select>
-                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -150,7 +154,7 @@ if(isset( $_POST['id_edit'])){
                         <!--Nombre-->
                         <div class="form-group">
                           <label  class="col-sm-2 control-label">Nombre</label>
-                          <div class="col-sm-10">
+                          <div class="col-sm-3">
                               <div class='input-group'>
                                   <input type="text" readonly="" class="form-control"  name="name_ticket" readonly="" value="<?php echo $usuario->getNombre();?>">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -161,7 +165,7 @@ if(isset( $_POST['id_edit'])){
                          <!--Email-->
                         <div class="form-group">
                           <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                          <div class="col-sm-10">
+                          <div class="col-sm-4">
                               <div class='input-group'>
                                   <input type="email" readonly="" class="form-control"  name="email_ticket" readonly="" value="<?php echo $usuario->getCorreo();?>">
                                 <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
@@ -172,7 +176,7 @@ if(isset( $_POST['id_edit'])){
                          <!--Departamento-->
                         <div class="form-group">
                           <label  class="col-sm-2 control-label">Departamento</label>
-                          <div class="col-sm-10">
+                          <div class="col-sm-3">
                               <div class='input-group'>
                                   <input type="text" readonly="" class="form-control"  name="departamento_ticket" readonly="" value="<?php echo utf8_encode($dep->getNombre())?>">
                                 <span class="input-group-addon"><i class="fa fa-users"></i></span>
@@ -183,7 +187,7 @@ if(isset( $_POST['id_edit'])){
                         <!--Asunto-->
                         <div class="form-group">
                           <label  class="col-sm-2 control-label">Asunto</label>
-                          <div class="col-sm-10">
+                          <div class="col-sm-4">
                               <div class='input-group'>
                                   <input type="text" readonly="" class="form-control"  name="asunto_ticket" readonly="" value="<?php echo $ticket->getAsunto();?>">
                                 <span class="input-group-addon"><i class="fa fa-paperclip"></i></span>
@@ -194,7 +198,7 @@ if(isset( $_POST['id_edit'])){
                         <!--Mensaje-->
                         <div class="form-group">
                           <label  class="col-sm-2 control-label">Mensaje</label>
-                          <div class="col-sm-10">
+                          <div class="col-sm-8">
                               <textarea class="form-control" readonly="" rows="3"  name="mensaje_ticket" readonly=""><?php echo $ticket->getProblema()?></textarea>
                           </div>
                         </div>
@@ -202,7 +206,7 @@ if(isset( $_POST['id_edit'])){
                         <!--Tecnico-->
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Técnico:</label>
-                            <div class='col-sm-10'>
+                            <div class='col-sm-3'>
                                 <div class="input-group">
                         <select class="form-control" name="tecnico">
                              <!--Validacion si hay tecnico asignado, sino establecer SIN TECNICO-->
@@ -234,7 +238,7 @@ if(isset( $_POST['id_edit'])){
                          <!--Prioridad-->
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Prioridad:</label>
-                            <div class='col-sm-10'>
+                            <div class='col-sm-4'>
                                 <div class="input-group">
                         <select class="form-control" name="prioridad">
                             <!--Validacion si hay prioridad asignada, sino establecer SIN PRIORIDAD-->
