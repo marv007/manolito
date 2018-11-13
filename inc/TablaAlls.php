@@ -33,7 +33,7 @@
                                     <tr>
                                         <td><?php echo $a->getIdTicket() ?></td>
                                         <td><?php echo $a->getAsunto() ?></td>
-                                        <td style="max-width: 45vh; "><?php echo $a->getProblema() ?></td>
+                                        <td style="max-width: 45vh; overflow: hidden;"><?php echo $a->getProblema() ?></td>
                                         <td><?php echo $a->getEstado() ?></td>
                                         <td><?php echo $a->getPrioridad() ?></td>
                                         <td><?php echo utf8_encode($dep->getNombre())?></td>
