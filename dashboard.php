@@ -111,7 +111,7 @@ if(!isset($_SESSION['tabla'])){
     <!-- ENCABEZADO -->
     <div class="container" style="color: white">
           <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12" style="padding: 0px;">
               <br>
                 <h3>Panel Administrativo <a class ="pull-right text-primary" style="color:white" href="vista-tickets.php">Ver mis tickets</a></h3>                
                 <p class="pull-right text-primary">
@@ -246,9 +246,10 @@ if(!isset($_SESSION['tabla'])){
      <?php }else if($_SESSION['idRol']==2){
          
          $arrTicket = array(); 
+         $arrTemp = array(); 
  
          //Arreglo con todos los tickets de un usuario
-         $arrTicket = $tk->obtenerTickett($_SESSION['idUsuario']);
+         $arrTicket = $mtxt->obtenerTicketxtec($_SESSION['idUsuario']);
          
  
          //Arreglo de solucionados de un usuario
@@ -263,22 +264,16 @@ if(!isset($_SESSION['tabla'])){
          $i = 0;
          $contProc = 0;
          while($i < count($arrTicket)){
-            $sit = $mtxt->obtenerTecxticket($arrTicket[$i]->getIdTicket());
-           
-            if($arrTicket[$i]->getEstado()=="Solucionado"){
+            $arrTemp[$i]= $tk->obtenerTicket($arrTicket[$i]->getIdTicket());
+           if($arrTemp[$i]->getEstado()=="Activo"){
+            $arrPen[] = $arrTemp[$i];
+           }else{
+               $arrRes[] = $arrTemp[$i];
+           }
             
-                $arrRes[] = $arrTicket[$i];
-                $contResueltos++;
-            }else if($sit->getIdTicket()==""){
-                $arrPen[] = $arrTicket[$i];
-                $contPendientes++;
-
-            }else{
-                $arrProc[] = $arrTicket[$i];
-                $contProc++;
-            }
             $i++;
         }
+        $contPendientes = count($arrPen);
      ?>
         <div class="container" style="color: white">
           <div class="row">

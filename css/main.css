@@ -14,6 +14,13 @@
   float: right !important;
 }
 
+label{
+  background-color: transparent !important;
+  border: 0px !important;
+  font-family: Poppins-Regular !important;
+  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+  font-size: 14px !important;
+}
 
 
 @font-face {

@@ -18,7 +18,7 @@
 
                                 <?php
                                 
-                                
+                                if(count($arrPen)){
                                      $i = 0;
                                      while($i < count($arrPen)){
                                           $a = $arrPen[$i];
@@ -48,6 +48,7 @@
                                 <?php
                                       $i++;
                                      }
+                                    }
                                 ?>
                             </table>
                            

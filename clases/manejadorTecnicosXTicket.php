@@ -51,6 +51,33 @@ class ManejadorTecnicosXTicket extends mysqli{
     }
 
 
+    public function obtenerTicketxtec($idUsuario){
+        try{
+            $conn = conexion::getInstance();
+            $stmn = "SELECT * from tecnicosxticket WHERE ID_usuario = $idUsuario";
+            $resultado = $conn->execQuery($stmn);
+            $Ticket = array();
+            while($ticket = $resultado->fetch_assoc()){
+                 //crea un objeto ticket
+                 $tk = new Ticket();
+                 $tk->setIdTicket($ticket['ID_ticket']);
+                 $tk->setIdUsuario($ticket['ID_usuario']);
+                 array_push($Ticket, $tk);
+                 //
+                 
+
+            }
+            //se cierra la conexion
+            $conn = null;
+            return $Ticket;
+            
+        }catch(exeption $e){
+            die("Error :". $e->getMessage());
+        }
+        
+    }
+
+
 }
 
 
