@@ -1,7 +1,7 @@
 
                         <div class="table-responsive" style="overflow-x: hidden;">
                            
-                            <table class="table table-hover table-striped table-bordered">
+                            <table class="table table-hover ">
                                 <thead style="background-color: #30914c; color: white">
                                     <tr>
                                         <th>Id</th>
@@ -33,7 +33,7 @@
                                     <tr>
                                         <td><?php echo $a->getIdTicket() ?></td>
                                         <td><?php echo $a->getAsunto() ?></td>
-                                        <td style="max-width: 45vh; overflow: hidden;"><?php echo $a->getProblema() ?></td>
+                                        <td><div class="celdaProbl" style="overflow:hidden; width: 350px; height: 20px"><?php echo $a->getProblema() ?></div></td>
                                         <td><?php echo $a->getEstado() ?></td>
                                         <td><?php echo $a->getPrioridad() ?></td>
                                         <td><?php echo utf8_encode($dep->getNombre())?></td>
@@ -48,7 +48,7 @@
                                      }
                                 ?>
                             </table>
-                            <ul class="pagination pagination-lg pager" id="myPager"></ul>
+                           
                                 
                            
                         

@@ -1,4 +1,6 @@
 
+                        
+                        
                         <div class="table-responsive" style="overflow-x: hidden;">
                            
                             <table class="table table-hover table-striped table-bordered">
@@ -17,8 +19,6 @@
                                 </thead>
 
                                 <?php
-                                
-                                if(count($arrPen)){
                                      $i = 0;
                                      while($i < count($arrPen)){
                                           $a = $arrPen[$i];
@@ -35,7 +35,7 @@
                                     <tr>
                                         <td><?php echo $a->getIdTicket() ?></td>
                                         <td><?php echo $a->getAsunto() ?></td>
-                                        <td style="max-width: 45vh; overflow: hidden;"><?php echo $a->getProblema() ?></td>
+                                        <td><div class="celdaProbl" style="overflow:hidden; width: 350px; height: 20px"><?php echo $a->getProblema() ?></div></td>
                                         <td><?php echo $a->getEstado() ?></td>
                                         <td><?php echo $a->getPrioridad() ?></td>
                                         <td><?php echo $dep->getNombre() ?></td>
@@ -48,10 +48,7 @@
                                 <?php
                                       $i++;
                                      }
-                                    }
                                 ?>
                             </table>
-                           
-                           
-                        
                 </div>
+                            

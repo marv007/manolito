@@ -27,7 +27,7 @@
                                     <tr>
                                         <td><?php echo $a->getIdTicket() ?></td>
                                         <td><?php echo $a->getAsunto() ?></td>
-                                        <td style="max-width: 45vh; display: table-cell; float: none; "><?php echo $a->getProblema() ?></td>
+                                        <td><div class="celdaProbl" style="overflow:hidden; width: 350px; height: 20px"><?php echo $a->getProblema() ?></div></td>
                                         <td><?php echo $a->getEstado() ?></td>
                                         <td><?php echo $a->getPrioridad() ?></td>
                                         <td><?php echo utf8_encode($dep->getNombre())?></td>

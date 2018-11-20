@@ -1,4 +1,4 @@
- <?php 
+<?php 
  session_start(); 
 
  if(!isset($_SESSION["usuario"])){
@@ -20,22 +20,7 @@
   $usuario = $us->obtenerUsuario($ticket->getIdUsuario());
   $md = new ManejadorDepartamento();
   $dep = $md->obtenerDepartamento($usuario->getIdDepartamento());
-  //Arreglo de usuarios tecnicos
-  $tec = $us->obtenerTecnicos();
   
-  //Traer tecnico del respectivo ticket 
-  $tXt = new ManejadorTecnicosXTicket();
-  $tecnObject = $tXt->obtenerTecxticket($_GET['id']); 
-  $tecnId = $tecnObject->getIdUsuario();
-  
-     if($tecnId == ""){
-         $tecnico = new Usuario();
-         $tecnico->setNombre("");
-     }else{
-        $usuarioTec = new ManejadorUsuario();
-        $tecnico = $usuarioTec->obtenerUsuario($tecnId);
-     }
-
   //Obtener parametros de archivo
   $manArchivo = new ManejadorArchivo(); 
   $arrArchivos = $manArchivo->obtenerArchivo();
@@ -50,7 +35,6 @@
       }
       $contador++;
   }
-  
  ?>
 <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <?php 
@@ -58,21 +42,14 @@
 
 if(isset( $_POST['id_edit'])){
     $idTicket = $_POST['id_edit'];
-    $idTec = $_POST['tecnico'];
-    $pri = $_POST['prioridad'];
+    $ticket->setEstado($_POST['estado_ticket']);
+    $ticket->setSolucion( $_POST['respuesta_ticket']);
+    $hoy = date('Y-m-d H:i:s');
+    $ticket->setFechaFinal($hoy);
 
+    
+    
 
-
-       if($idTec == "Sin Tecnico" || $pri == "Sin Prioridad"){ ?>
-                               <!--  alert -->
-                               <div class="alert alert-danger" role="alert" style="position: absolute; top:60px; right:15px;">
-                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                  <span class= "glyphicon glyphicon-error"></span><strong>¡Error!</strong><br>¡Tienes que asignar un tecnico y dar prioridad! 
-                                </div>
-                               <!--alert-->
-      <?php }else{
-         
-         $ticket->setprioridad($pri);
          $mt = new ManejadorTicket();
          $mt->actualizarTicket($ticket);
       
@@ -89,7 +66,7 @@ if(isset( $_POST['id_edit'])){
       <?php
       header("Location: dashboard.php");
       }
-   }?>
+   ?>
 
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -108,10 +85,10 @@ if(isset( $_POST['id_edit'])){
     </head>
     <body>
         <!--NAVBAR-->
-    <?php include "inc/navBar.php";  ?>
+        <?php include "inc/navBar.php";  ?>
       
     <!--Si es administrador-->
-     <?php if($_SESSION['idRol']==1){ ?>
+     <?php if($_SESSION['idRol']==2){ ?>
     <br><br><br>
       <div class="container" style="background-color: white">
           <div class="row">
@@ -122,7 +99,7 @@ if(isset( $_POST['id_edit'])){
                   <?php include "./inc/timezone.php";?>
                  </strong>
                </p>
-                <h3 class="animated lightSpeedIn">Información del Ticket</h3>
+                <h3 class="animated lightSpeedIn">Solucionar Ticket</h3>
               </div>
             </div>
           </div>
@@ -134,21 +111,12 @@ if(isset( $_POST['id_edit'])){
             <div class="col-sm-12">
                 <form class="form-horizontal" role="form" action="" method="POST">
                 		<input type="hidden" name="id_edit" value="<?php echo $_GET['id']?>">
+                        <input type="hidden" name="prioridad" value="<?php echo $ticket->getPrioridad()?>">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Id Ticket</label>
                             <div class='col-sm-3'>
                                 <div class="input-group">
                                     <input class="form-control" readonly="" type="text" name="Id_ticket" readonly="" value="<?php echo $ticket->getIdTicket();?>">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <!--Estado-->
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Estado</label>
-                            <div class='col-sm-3'>
-                                <div class="input-group">
-                                    <input class="form-control" readonly="" type="text" name="Id_ticket" readonly="" value="<?php echo $ticket->getEstado();?>">
                                     
                                 </div>
                             </div>
@@ -187,17 +155,6 @@ if(isset( $_POST['id_edit'])){
                           </div>
                         </div>
                         
-                        <!--Asunto-->
-                        <div class="form-group">
-                          <label  class="col-sm-2 control-label">Asunto</label>
-                          <div class="col-sm-4">
-                              <div class='input-group'>
-                                  <input type="text" readonly="" class="form-control"  name="asunto_ticket" readonly="" value="<?php echo $ticket->getAsunto();?>">
-                                <span class="input-group-addon"><i class="fa fa-paperclip"></i></span>
-                              </div> 
-                          </div>
-                        </div>
-                        
                         <!--Mensaje-->
                         <div class="form-group">
                           <label  class="col-sm-2 control-label">Mensaje</label>
@@ -224,70 +181,38 @@ if(isset( $_POST['id_edit'])){
                                    </span>
                                 </div>
                         </div>
-                        
-                        <!--Tecnico-->
+
+                        <!--Respuesta-->
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Técnico:</label>
-                            <div class='col-sm-3'>
-                                <div class="input-group">
-                        <select class="form-control" name="tecnico">
-                             <!--Validacion si hay tecnico asignado, sino establecer SIN TECNICO-->
-                        <?php 
-                            
-                            if($tecnico->getNombre()==""){
-                                $tecnico->setNombre("Sin Tecnico");  
-                             }?>
-                            <option value="<?php echo $tecnico->getNombre()?>"><?php echo $tecnico->getNombre() ?> (Actual)</option>>
-                            <!--Cargando todos los tecnicos-->
-                            <?php
-                            
-                                $i = 0;
-                                while($i < count($tec)){
-                                     ?>
-                                     <option value="<?php echo $tec[$i]->getIdUsuario() ?>"><?php echo $tec[$i]->getNombre() ?></option>
-                                     <?php
-                                
-                                    $i++;
-                                }
-                            
-                            ?>
-                            
-                        </select>
-                        </div>
-                        </div>
-                        </div>
-                         
-                         <!--Prioridad-->
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Prioridad:</label>
-                            <div class='col-sm-4'>
-                                <div class="input-group">
-                        <select class="form-control" name="prioridad">
-                            <!--Validacion si hay prioridad asignada, sino establecer SIN PRIORIDAD-->
-                            <?php 
-                            $prioridad = $ticket->getPrioridad();
-                            if($ticket->getPrioridad()==""){
-                                $prioridad = "Sin Prioridad";  
-                             }?>
-                            <option value="<?php echo $prioridad?>"><?php echo $prioridad ?> (Actual)</option>
-                            
-                            <option value="Alta">Alta</option>
-                            <option value="Media">Media</option>
-                            <option value="Baja">Baja</option>
-                            
-                        </select>
-                        </div>
-                        </div>
+                          <label  class="col-sm-2 control-label">Respuesta</label>
+                          <div class="col-sm-8">
+                              <textarea class="form-control" rows="3"  name="respuesta_ticket" placeholder="Escriba la respuesta al ticket"></textarea>
+                          </div>
                         </div>
 
-                  
-                    
+                         <!--Estado-->
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">Estado</label>
+                            <div class='col-sm-3'>
+                                <div class="input-group">
+                                    <select class="form-control" name="estado_ticket">
+                                        <option value="<?php echo $reg['estado_ticket']?>"><?php echo $ticket->getEstado();?> (Actual)</option>
+                                        <option value="Pendiente">Activo</option>
+                                        <option value="En proceso">Pausa</option>
+                                        <option value="Resuelto">Solucionado</option>
+                                      </select>
+                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--Botones-->
                         <div class="form-group">
                           <div class="col-sm-12 col-md-4 text-right">
-                              <button type="submit" class="btn btn-info">Actualizar ticket</button>
+                              <button type="submit" class="btn btn-success">Responder ticket</button>
                           </div>
                           <div class="col-sm-12 col-md-4 text-center">
-                                <a href="dashboard.php" class="btn btn-primary btn-sm pull-right"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver administrar Tickets</a>
+                                <a href="dashboard.php" class="btn btn-primary btn-sm pull-right"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver Tickets por Resolver</a>
                           </div>
 
                         </div>
@@ -316,9 +241,3 @@ $('#stac').stacktable();
 
     </body>
 </html>
-
-
-
-   
-
-

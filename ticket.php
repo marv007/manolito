@@ -141,12 +141,10 @@ if(!empty($_POST['asunto']) && !empty($_POST['descripcion'])){
                   
                   <div class="form-group">
                       <div class="input-group input-file" name="Fichier1" type="file" >
-                          <input type="text" class="form-control" placeholder='Selecciona un archivo...' />			
+                              <input type="text" class="form-control" placeholder='Selecciona un archivo...' />			
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-choose" type="button">Examinar</button>
                               </span>
-                  
-                  
                       </div>
                     </div>
 

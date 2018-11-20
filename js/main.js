@@ -157,10 +157,12 @@ $(function() {
 
         $(thisAlert).removeClass('alert-validate');
     }
-
-    
-   
-    
-    
-
 })(jQuery);
+
+//para paginar tabla
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "pagingType": "full_numbers"
+    } );
+  } );
+//fin paginar tabla

@@ -13,9 +13,10 @@ class ManejadorUsuario extends mysqli{
         $stmn = "SELECT * from usuario WHERE ID_usuario = $idUsuario";
         $resultado = $conn->execQuery($stmn);
         
+        $us = new Usuario();
         while($user = $resultado->fetch_assoc()){
              //crea un objeto usuario
-             $us = new Usuario();
+             
              $us->setIdUsuario($user['ID_usuario']);
              $us->setDepartamento($user['ID_departamento']);
              $us->setNombre($user['nombre']);

@@ -34,7 +34,7 @@
                                     <tr>
                                         <td class="text-center"><?php echo $a->getIdTicket() ?></td>
                                         <td class="text-center"><?php echo $a->getAsunto() ?></td>
-                                        <td class="text-center"><?php echo $a->getProblema() ?></td>
+                                        <td><div class="celdaProbl" style="overflow:hidden; width: 350px; height: 20px"><?php echo $a->getProblema() ?></div></td>
                                         <td class="text-center"><?php echo $a->getEstado() ?></td>
                                         <td class="text-center"><?php echo $a->getFechaFinal() ?></td>
                                         <td class="text-center"><?php echo utf8_encode($dep->getNombre())?></td>

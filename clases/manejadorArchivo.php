@@ -30,15 +30,15 @@ class ManejadorArchivo extends mysqli{
     public function obtenerArchivo(){
         try{
             $conn = conexion::getInstance();
-            $stmn = "SELECT * from documento";
+            $stmn = "SELECT * from archivo";
             $resultado = $conn->execQuery($stmn);
             $Doc = array();
             while($docum = $resultado->fetch_assoc()){
                  //crea un objeto ticket
-                 $dc = new Documento();
-                 $dc->setIdDocumento($docum['ID_archivo']);
-                 $dc->setNombreDocumento($docum['nombre']);
-                 $dc->setProblema($docum['ruta']);
+                 $dc = new Archivo();
+                 $dc->setIdArchivo($docum['ID_archivo']);
+                 $dc->setNombreArchivo($docum['nombre']);
+                 $dc->setRutaArchivo($docum['ruta']);
                  
                  //se a;ade el objeto documento a la coleccion de objetos Doc
                  array_push($Doc, $dc);

@@ -81,12 +81,13 @@ class ManejadorTicket extends mysqli{
     public function obtenerTicket($idTicket){
         try{
             $conn = conexion::getInstance();
-            $stmn = "SELECT * from ticket WHERE ID_ticket = $idTicket";
+            $stmn = "SELECT * from ticket WHERE status = 'active' AND ID_ticket = $idTicket";
             $resultado = $conn->execQuery($stmn);
             
+            $tk = new Ticket();
             while($ticket = $resultado->fetch_assoc()){
                  //crea un objeto ticket
-                 $tk = new Ticket();
+                 
                  $tk->setIdTicket($ticket['ID_ticket']);
                  $tk->setIdUsuario($ticket['ID_usuario']);
                  $tk->setAsunto($ticket['asunto']);
@@ -98,7 +99,8 @@ class ManejadorTicket extends mysqli{
                  $tk->setFechaFinal($ticket['fechaFinal']);
                  $tk->setEstado($ticket['estado']);
                  $tk->setPrioridad($ticket['prioridad']);
-                 //se a;ade el objeto ticket a la coleccion de objetos ticket
+                 $tk->setIdArchivo($ticket['ID_archivo']);
+                 
                  
 
             }
@@ -150,11 +152,16 @@ class ManejadorTicket extends mysqli{
 
     
 
-    public function actualizarTicket($idTicket, $pri){
+    public function actualizarTicket(Ticket $t){
         try{
+            $idTicket = $t->getIdTicket();
+            $pri = $t->getPrioridad();
+            $estado = $t->getEstado();
+            $respuesta = $t->getSolucion();
+            $fechaFin = $t->getFechaFinal();
             
             $conn = conexion::getInstance();
-            $stmn = "UPDATE ticket SET prioridad='$pri' WHERE ID_ticket='$idTicket'";
+            $stmn = "UPDATE ticket SET prioridad='$pri', estado='$estado', solucion='$respuesta', fechaFinal='$fechaFin' WHERE ID_ticket='$idTicket'";
 
             $conn->execQuery($stmn);
             

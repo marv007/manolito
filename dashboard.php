@@ -21,11 +21,6 @@ if(!isset($_SESSION['tabla'])){
     $_SESSION['tabla']="todos";
 }
 
-
-
-
-
-
 ?>
 
 <!doctype html>
@@ -53,10 +48,8 @@ if(!isset($_SESSION['tabla'])){
         <link rel="stylesheet" href="css/main.css">
 
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-        
-        
-        
-
+        <script src="js/vendor/jquery-1.11.2.min.js"></script>
+       
 
     </head>
     <body>
@@ -88,7 +81,7 @@ if(!isset($_SESSION['tabla'])){
         while($i < count($arrTicket)){
             $sit = $mtxt->obtenerTecxticket($arrTicket[$i]->getIdTicket());
            
-            if($arrTicket[$i]->getEstado()=="Solucionado"){
+            if($arrTicket[$i]->getEstado()=="Resuelto"){
             
             $arrRes[] = $arrTicket[$i];
             $contResueltos++;
@@ -124,11 +117,11 @@ if(!isset($_SESSION['tabla'])){
     </div>
     
       <!--Contenido pestañas-->
-        <div class="container" style="background-color: #eaedfa">
-            <div class="row">
+        <div class="container"  style="background-color: #eaedfa">
+            <div class="row" >
                 <div class="col-md-12">
                     <ul class="nav nav-tabs nav-justified" >
-                    <li class="active"><a href="#ticketsp" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Tickets pendientes&nbsp;&nbsp; <span class="badge" style="background-color:#f55210"><?php echo $contPendientes?></span></a></li>
+                        <li class="active"><a href="#ticketsp" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Tickets pendientes&nbsp;&nbsp; <span class="badge" style="background-color:#f55210"><?php echo $contPendientes?></span></a></li>
                         <li><a href="#ticketsproc" data-toggle="tab"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Tickets en proceso&nbsp;&nbsp;<span class="badge" style="background-color: #f7822c"><?php echo $contProc?></span></a></li>
                         <li><a href="#ticketsre" data-toggle="tab"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Tickets resueltos&nbsp;&nbsp; <?php $_SESSION['tabla']=="resuelto"?><span class="badge" style="background-color:  #6ada13"><?php echo $contResueltos?></span></a></li>
                         <li><a href="#ticketsall" data-toggle="tab"><i class="fa fa-list" ></i>&nbsp;&nbsp;Todos los tickets&nbsp;&nbsp; <?php $_SESSION['tabla']=="todos"?><span class="badge" style="background-color:#3498db"><?php echo $contador?></span></a></li>                        
@@ -265,10 +258,11 @@ if(!isset($_SESSION['tabla'])){
          $contProc = 0;
          while($i < count($arrTicket)){
             $arrTemp[$i]= $tk->obtenerTicket($arrTicket[$i]->getIdTicket());
-           if($arrTemp[$i]->getEstado()=="Activo"){
+           if($arrTemp[$i]->getEstado()=="Activo" && $arrTemp[$i]->getIdTicket()!=NULL){
             $arrPen[] = $arrTemp[$i];
-           }else{
+           }else if($arrTemp[$i]->getEstado()=="Resuelto"){
                $arrRes[] = $arrTemp[$i];
+               $contResueltos++;
            }
             
             $i++;
@@ -298,9 +292,6 @@ if(!isset($_SESSION['tabla'])){
                     <ul class="nav nav-tabs nav-justified" >
                         <li class="active"><a href="#ticketsp" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Buzon de Entrada&nbsp;&nbsp; <span class="badge" style="background-color:#f55210"><?php echo $contPendientes?></span></a></li>
                         <li><a href="#ticketsre" data-toggle="tab"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Tickets resueltos&nbsp;&nbsp; <?php $_SESSION['tabla']=="resuelto"?><span class="badge" style="background-color:  #6ada13"><?php echo $contResueltos?></span></a></li>
-                                                
-                        
-                        
                     </ul>
                 </div>
             </div>
@@ -313,21 +304,11 @@ if(!isset($_SESSION['tabla'])){
                         <div class="col-md-12">
                         
                             <?php 
-                                include "inc/TablaPen.php";
-                                
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="tab-pane" id="ticketsall">  
-                    <div class="row">
-                        <div class="col-md-12">
-
-                            <?php
-                
-                                include "inc/TablaAlls.php";
-                
+                               if(!empty($arrPen)){
+                                include "inc/TablaPenT.php";
+                               }else{
+                                   echo "<h1>No se encontraron Tickets</h1>";
+                               } 
                             ?>
                         </div>
                     </div>
@@ -356,12 +337,13 @@ if(!isset($_SESSION['tabla'])){
         $arrTicket = $tk->obtenerTickett($_SESSION['idUsuario']);
         
 
-        //Arreglo de solucionados
+        //Arreglo de resueltos
         $arrRes = array();
 
         //Arreglo de pendientes
         $arrPen = array();
-
+        
+        //Arreglo de en proceso
         $arrProc = array();
 
         $contador = count($arrTicket);
@@ -372,10 +354,10 @@ if(!isset($_SESSION['tabla'])){
         while($i < count($arrTicket)){
             $sit = $mtxt->obtenerTecxticket($arrTicket[$i]->getIdTicket());
            
-            if($arrTicket[$i]->getEstado()=="Solucionado"){
+            if($arrTicket[$i]->getEstado()=="Resuelto"){
             
-            $arrRes[] = $arrTicket[$i];
-            $contResueltos++;
+                $arrRes[] = $arrTicket[$i];
+                $contResueltos++;
             }else if($sit->getIdTicket()==""){
                 $arrPen[] = $arrTicket[$i];
                 $contPendientes++;
@@ -427,9 +409,8 @@ if(!isset($_SESSION['tabla'])){
                     <div class="row">
                         <div class="col-md-12">
                         
-                            <?php 
-                                include "inc/TablaPenU.php";
-                                
+                            <?php                        
+                                include "inc/TablaPenU.php";                             
                             ?>
                         </div>
                     </div>
@@ -480,14 +461,18 @@ if(!isset($_SESSION['tabla'])){
 
      <?php } ?>
  <!--////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+        
 
         <script src="js/vendor/bootstrap.min.js"></script>
 
         <script src="js/main.js"></script>
 
 
-          <script type=”text/javascript” src="stack/stacktable.js"></script>
+          <script type="text/javascript" src="stack/stacktable.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+          
 <!--===============================================================================================-->
 <script type="text/javascript">
 $(document).ready(function() {
@@ -497,6 +482,7 @@ $('#stac').stacktable();
 
 <!--===============================================================================================-->
 
+<!--===============================================================================================-->
     </body>
 </html>
 
